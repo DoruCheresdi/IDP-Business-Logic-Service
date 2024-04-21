@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/FeedbackController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/advice/MethodArgumentNotValidExceptionAdvice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/FeedbackRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Feedback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/FeedbackRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/auth/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/FeedbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/FeedbackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +136,7 @@
       <workItem from="1713215751284" duration="2119000" />
       <workItem from="1713219003974" duration="1054000" />
       <workItem from="1713220071335" duration="75000" />
-      <workItem from="1713220178427" duration="22168000" />
+      <workItem from="1713220178427" duration="24916000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -179,7 +173,21 @@
       <option name="project" value="LOCAL" />
       <updated>1713712830401</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added feedback post and get">
+      <created>1713719898653</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713719898653</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fixed getting 403 on all ResponseStatusException exceptions">
+      <created>1713720564126</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713720564126</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,18 +222,9 @@
     <MESSAGE value="added jwt authentication" />
     <MESSAGE value="reorganised files" />
     <MESSAGE value="reindent files" />
-    <option name="LAST_COMMIT_MESSAGE" value="reindent files" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added feedback post and get" />
+    <MESSAGE value="fixed getting 403 on all ResponseStatusException exceptions" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed getting 403 on all ResponseStatusException exceptions" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
