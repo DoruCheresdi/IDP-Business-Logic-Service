@@ -74,6 +74,9 @@ public class FeedbackService {
 
     public void deleteById(Integer id) {
         Feedback feedback = findById(id);
+        if (feedback == null) {
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find feedback");
+        }
 
         feedbackRepository.delete(feedback);
     }

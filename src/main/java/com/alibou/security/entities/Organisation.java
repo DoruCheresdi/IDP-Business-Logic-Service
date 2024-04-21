@@ -20,10 +20,25 @@ public class Organisation {
 
     private String name;
 
+    private String iban;
+
+    private String description;
+
     @JsonIgnore
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organisations")
-    private List<User> users;
+    @JoinTable(
+            name = "organisation_users",
+            joinColumns = @JoinColumn(name = "org_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> volunteers;
 
+
+    @JsonIgnore
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "owner_id"
+    )
+    private User owner;
 }

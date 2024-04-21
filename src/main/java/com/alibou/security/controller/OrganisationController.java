@@ -1,0 +1,71 @@
+package com.alibou.security.controller;
+
+import com.alibou.security.dtos.OrganisationDto;
+import com.alibou.security.dtos.OrganisationUpdateDto;
+import com.alibou.security.entities.Organisation;
+import com.alibou.security.entities.User;
+import com.alibou.security.service.OrganisationService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
+
+@RestController
+@RequestMapping("/organisation")
+@RequiredArgsConstructor
+public class OrganisationController {
+
+    private final OrganisationService organisationService;
+
+    @PostMapping
+    public ResponseEntity<Organisation> saveOrganisation(@RequestBody @Valid OrganisationDto dto,
+                                         Principal connectedUser) {
+        Organisation organisation = organisationService.save(dto, connectedUser.getName());
+        return new ResponseEntity<>(organisation, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<Organisation> getOrganisation(@NotNull Integer id) {
+        Organisation organisation = organisationService.findById(id);
+        return new ResponseEntity<>(organisation, HttpStatus.OK);
+    }
+
+    @GetMapping("/paged")
+    public ResponseEntity<Page<Organisation>> findAllOrganisationsPaged(@Valid Pageable pageable) {
+        return ResponseEntity.ok(organisationService.findAllPaged(pageable));
+    }
+
+    @DeleteMapping()
+    @PreAuthorize("hasAuthority('admin:delete')")
+    public ResponseEntity<?> deleteOrganisation(@NotNull Integer id) {
+        organisationService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add-volunteer")
+    public ResponseEntity<?> addAsVolunteer(Principal connectedUser, @NotNull Integer organisationId) {
+        organisationService.addAsVolunteer(connectedUser.getName(), organisationId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<Organisation> updateOrganisation(@RequestBody @Valid OrganisationUpdateDto dto,
+                                           Principal connectedUser) {
+        Organisation organisation = organisationService.update(dto, connectedUser.getName());
+        return ResponseEntity.ok(organisation);
+    }
+
+    @GetMapping("/get-all-volunteers")
+    public ResponseEntity<List<User>> getAllVolunteers(@NotNull Integer organisationId) {
+        List<User> volunteers = organisationService.findAllVolunteers(organisationId);
+        return ResponseEntity.ok(volunteers);
+    }
+}
