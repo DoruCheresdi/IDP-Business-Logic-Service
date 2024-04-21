@@ -1,6 +1,7 @@
-package com.alibou.security.user;
+package com.alibou.security.entities;
 
-import com.alibou.security.token.Token;
+import com.alibou.security.entities.Token;
+import com.alibou.security.enums.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -17,7 +18,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Data

@@ -1,5 +1,8 @@
-package com.alibou.security.book;
+package com.alibou.security.controller;
 
+import com.alibou.security.dtos.BookRequest;
+import com.alibou.security.service.BookService;
+import com.alibou.security.entities.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

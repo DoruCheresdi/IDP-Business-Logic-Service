@@ -1,6 +1,6 @@
 package com.alibou.security.auth;
 
-import com.alibou.security.user.Role;
+import com.alibou.security.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
