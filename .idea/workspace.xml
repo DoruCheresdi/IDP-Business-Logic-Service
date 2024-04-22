@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="added organisation">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/BenefitController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/BenefitDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Benefit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/BenefitRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" afterDir="false" />
+    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/BenefitReturnDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/BenefitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/BenefitController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -143,7 +140,7 @@
       <workItem from="1713219003974" duration="1054000" />
       <workItem from="1713220071335" duration="75000" />
       <workItem from="1713220178427" duration="39589000" />
-      <workItem from="1713803309520" duration="2883000" />
+      <workItem from="1713803309520" duration="5591000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -215,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713744248509</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added benefit">
+      <created>1713806574937</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1713806574937</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,7 +259,8 @@
     <MESSAGE value="added put and delete requests" />
     <MESSAGE value="added organisation" />
     <MESSAGE value="added organisation and role claims to token" />
-    <option name="LAST_COMMIT_MESSAGE" value="added organisation and role claims to token" />
+    <MESSAGE value="added benefit" />
+    <option name="LAST_COMMIT_MESSAGE" value="added benefit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

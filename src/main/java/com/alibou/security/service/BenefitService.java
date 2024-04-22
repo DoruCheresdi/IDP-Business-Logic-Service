@@ -3,6 +3,7 @@ package com.alibou.security.service;
 import com.alibou.security.dtos.BenefitDto;
 import com.alibou.security.entities.Benefit;
 import com.alibou.security.entities.Organisation;
+import com.alibou.security.entities.User;
 import com.alibou.security.repository.BenefitRepository;
 import com.alibou.security.repository.OrganisationRepository;
 import com.alibou.security.repository.UserRepository;
@@ -11,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +24,17 @@ public class BenefitService {
     private final BenefitRepository benefitRepository;
     private final OrganisationRepository organisationRepository;
 
-    public Benefit save(BenefitDto dto) {
+    private final UserRepository userRepository;
+
+    public Benefit save(BenefitDto dto, String userEmail) {
         Organisation organisation = organisationRepository.findById(dto.getOrganisationId())
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+        if (!Objects.equals(organisation.getOwner().getId(), user.getId())) {
+            throw new ResponseStatusException(UNAUTHORIZED, "You can't save a benefit for an organisation you don't own!");
+        }
 
         var benefit = Benefit.builder()
                 .name(dto.getName())
