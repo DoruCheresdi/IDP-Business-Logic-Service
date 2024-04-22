@@ -1,7 +1,6 @@
 package com.alibou.security.service;
 
 import com.alibou.security.dtos.FeedbackRequestDto;
-import com.alibou.security.entities.Book;
 import com.alibou.security.entities.Feedback;
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.FeedbackRepository;

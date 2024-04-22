@@ -8,6 +8,7 @@ import com.alibou.security.service.OrganisationService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -32,14 +33,14 @@ public class OrganisationController {
         return new ResponseEntity<>(organisation, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<Organisation> getOrganisation(@NotNull Integer id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Organisation> getOrganisation(@PathVariable @NotNull Integer id) {
         Organisation organisation = organisationService.findById(id);
         return new ResponseEntity<>(organisation, HttpStatus.OK);
     }
 
     @GetMapping("/paged")
-    public ResponseEntity<Page<Organisation>> findAllOrganisationsPaged(@Valid Pageable pageable) {
+    public ResponseEntity<Page<Organisation>> findAllOrganisationsPaged(@ParameterObject @Valid Pageable pageable) {
         return ResponseEntity.ok(organisationService.findAllPaged(pageable));
     }
 
@@ -63,8 +64,8 @@ public class OrganisationController {
         return ResponseEntity.ok(organisation);
     }
 
-    @GetMapping("/get-all-volunteers")
-    public ResponseEntity<List<User>> getAllVolunteers(@NotNull Integer organisationId) {
+    @GetMapping("/get-all-volunteers/{organisationId}")
+    public ResponseEntity<List<User>> getAllVolunteers(@PathVariable @NotNull Integer organisationId) {
         List<User> volunteers = organisationService.findAllVolunteers(organisationId);
         return ResponseEntity.ok(volunteers);
     }

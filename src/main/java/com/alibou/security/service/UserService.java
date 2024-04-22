@@ -4,6 +4,8 @@ import com.alibou.security.dtos.ChangePasswordRequest;
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import java.security.Principal;
 public class UserService {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository repository;
+    private final UserRepository userRepository;
     public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
 
         var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
@@ -33,6 +35,10 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
         // save the new password
-        repository.save(user);
+        userRepository.save(user);
+    }
+
+    public Page<User> findAllUsersPaged(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 }

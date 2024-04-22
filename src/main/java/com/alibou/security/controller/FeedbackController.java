@@ -6,6 +6,7 @@ import com.alibou.security.service.FeedbackService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -34,13 +35,13 @@ public class FeedbackController {
         return ResponseEntity.ok(feedbackService.findAll());
     }
 
-    @GetMapping()
-    public ResponseEntity<Feedback> findFeedbackById(@NotNull Integer id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Feedback> findFeedbackById(@PathVariable @NotNull Integer id) {
         return ResponseEntity.ok(feedbackService.findById(id));
     }
 
     @GetMapping("/paged")
-    public ResponseEntity<Page<Feedback>> findAllFeedbacksPaged(@Valid Pageable pageable) {
+    public ResponseEntity<Page<Feedback>> findAllFeedbacksPaged(@ParameterObject @Valid Pageable pageable) {
         return ResponseEntity.ok(feedbackService.findAllPaged(pageable));
     }
 
