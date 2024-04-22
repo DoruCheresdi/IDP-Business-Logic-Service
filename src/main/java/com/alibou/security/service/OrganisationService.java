@@ -1,5 +1,6 @@
 package com.alibou.security.service;
 
+import com.alibou.security.auth.AuthenticationService;
 import com.alibou.security.dtos.FeedbackRequestDto;
 import com.alibou.security.dtos.OrganisationDto;
 import com.alibou.security.dtos.OrganisationUpdateDto;
@@ -27,6 +28,8 @@ public class OrganisationService {
 
     private final UserRepository userRepository;
 
+    private final AuthenticationService authenticationService;
+
     public Organisation save(OrganisationDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
@@ -37,6 +40,9 @@ public class OrganisationService {
                 .owner(user)
                 .iban(dto.getIban())
                 .description(dto.getDescription()).build();
+
+        // TODO commented this since it is annoying to have to reauthenticate from swagger:
+//        authenticationService.revokeAllUserTokens(user);
 
         return organisationRepository.save(organisation);
     }

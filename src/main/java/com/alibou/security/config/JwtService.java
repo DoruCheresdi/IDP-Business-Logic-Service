@@ -1,5 +1,9 @@
 package com.alibou.security.config;
 
+import com.alibou.security.entities.Organisation;
+import com.alibou.security.entities.User;
+import com.alibou.security.repository.OrganisationRepository;
+import com.alibou.security.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -8,14 +12,17 @@ import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 
     @Value("${application.security.jwt.secret-key}")
@@ -24,6 +31,10 @@ public class JwtService {
     private long jwtExpiration;
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
+
+    private final OrganisationRepository organisationRepository;
+
+    private final UserRepository userRepository;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -35,7 +46,23 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        HashMap<String, Object> customclaims = new HashMap<>();
+
+        User user = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("No user found in generate token"));
+
+        setOrganisationIdsClaim(user, customclaims);
+        setRolesClaim(user, customclaims);
+        return generateToken(customclaims, userDetails);
+    }
+
+    private void setOrganisationIdsClaim(User user, HashMap<String, Object> customclaims) {
+        List<Integer> organisationIds = organisationRepository.findAllByOwner(user).stream().map(Organisation::getId).toList();
+        customclaims.put("OwnedOrganisations", organisationIds);
+    }
+
+    private void setRolesClaim(User user, HashMap<String, Object> customclaims) {
+        customclaims.put("Role", user.getRole());
     }
 
     public String generateToken(
