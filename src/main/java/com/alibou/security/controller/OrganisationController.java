@@ -1,6 +1,7 @@
 package com.alibou.security.controller;
 
 import com.alibou.security.dtos.OrganisationDto;
+import com.alibou.security.dtos.OrganisationReturnDto;
 import com.alibou.security.dtos.OrganisationUpdateDto;
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.User;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/organisation")
@@ -27,26 +29,26 @@ public class OrganisationController {
     private final OrganisationService organisationService;
 
     @PostMapping
-    public ResponseEntity<Organisation> saveOrganisation(@RequestBody @Valid OrganisationDto dto,
-                                         Principal connectedUser) {
+    public ResponseEntity<OrganisationReturnDto> saveOrganisation(@RequestBody @Valid OrganisationDto dto,
+                                                                  Principal connectedUser) {
         Organisation organisation = organisationService.save(dto, connectedUser.getName());
-        return new ResponseEntity<>(organisation, HttpStatus.CREATED);
+        return new ResponseEntity<>(new OrganisationReturnDto(organisation), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Organisation> getOrganisation(@PathVariable @NotNull Integer id) {
+    public ResponseEntity<OrganisationReturnDto> getOrganisation(@PathVariable @NotNull Integer id) {
         Organisation organisation = organisationService.findById(id);
-        return new ResponseEntity<>(organisation, HttpStatus.OK);
+        return new ResponseEntity<>(new OrganisationReturnDto(organisation), HttpStatus.OK);
     }
 
     @GetMapping("/paged")
-    public ResponseEntity<Page<Organisation>> findAllOrganisationsPaged(@ParameterObject @Valid Pageable pageable) {
-        return ResponseEntity.ok(organisationService.findAllPaged(pageable));
+    public ResponseEntity<Page<OrganisationReturnDto>> findAllOrganisationsPaged(@ParameterObject @Valid Pageable pageable) {
+        return ResponseEntity.ok(organisationService.findAllPaged(pageable).map(OrganisationReturnDto::new));
     }
 
-    @DeleteMapping()
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
-    public ResponseEntity<?> deleteOrganisation(@NotNull Integer id) {
+    public ResponseEntity<?> deleteOrganisation(@PathVariable @NotNull Integer id) {
         organisationService.deleteById(id);
         return ResponseEntity.ok().build();
     }
@@ -58,10 +60,10 @@ public class OrganisationController {
     }
 
     @PutMapping
-    public ResponseEntity<Organisation> updateOrganisation(@RequestBody @Valid OrganisationUpdateDto dto,
-                                           Principal connectedUser) {
+    public ResponseEntity<OrganisationReturnDto> updateOrganisation(@RequestBody @Valid OrganisationUpdateDto dto,
+                                                                    Principal connectedUser) {
         Organisation organisation = organisationService.update(dto, connectedUser.getName());
-        return ResponseEntity.ok(organisation);
+        return ResponseEntity.ok(new OrganisationReturnDto(organisation));
     }
 
     @GetMapping("/get-all-volunteers/{organisationId}")

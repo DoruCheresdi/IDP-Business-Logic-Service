@@ -1,6 +1,7 @@
 package com.alibou.security.controller;
 
 import com.alibou.security.dtos.ReviewDto;
+import com.alibou.security.dtos.ReviewReturnDto;
 import com.alibou.security.entities.Review;
 import com.alibou.security.service.ReviewService;
 import jakarta.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/review")
@@ -24,20 +26,22 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<Review> saveReview(@RequestBody @Valid ReviewDto dto, Principal connectedUser) {
+    public ResponseEntity<ReviewReturnDto> saveReview(@RequestBody @Valid ReviewDto dto, Principal connectedUser) {
         Review review = reviewService.save(dto, connectedUser.getName());
-        return new ResponseEntity<>(review, HttpStatus.CREATED);
+        return new ResponseEntity<>(new ReviewReturnDto(review), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Review> getReview(@PathVariable Integer id) {
+    public ResponseEntity<ReviewReturnDto> getReview(@PathVariable Integer id) {
         Review review = reviewService.findById(id);
-        return new ResponseEntity<>(review, HttpStatus.OK);
+        return new ResponseEntity<>(new ReviewReturnDto(review), HttpStatus.OK);
     }
 
     @GetMapping("/paged")
-    public ResponseEntity<Page<Review>> findAllReviewsPaged(@Valid Pageable pageable) {
-        return ResponseEntity.ok(reviewService.findAllPaged(pageable));
+    public ResponseEntity<Page<ReviewReturnDto>> findAllReviewsPaged(Pageable pageable) {
+        Page<ReviewReturnDto> reviews = reviewService.findAllPaged(pageable)
+                .map(ReviewReturnDto::new);
+        return ResponseEntity.ok(reviews);
     }
 
     @DeleteMapping("/{id}")
@@ -48,14 +52,16 @@ public class ReviewController {
     }
 
     @GetMapping("/by-organisation")
-    public ResponseEntity<List<Review>> findAllReviewsByOrganisation(@NotNull Integer organisationId) {
+    public ResponseEntity<List<ReviewReturnDto>> findAllReviewsByOrganisation(@NotNull Integer organisationId) {
         List<Review> reviews = reviewService.findAllByOrganisationId(organisationId);
-        return ResponseEntity.ok(reviews);
+        List<ReviewReturnDto> dtos = reviews.stream().map(ReviewReturnDto::new).collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("/by-user")
-    public ResponseEntity<List<Review>> findAllReviewsByUser(@RequestParam String userEmail) {
+    public ResponseEntity<List<ReviewReturnDto>> findAllReviewsByUser(@RequestParam String userEmail) {
         List<Review> reviews = reviewService.findAllByUserEmail(userEmail);
-        return ResponseEntity.ok(reviews);
+        List<ReviewReturnDto> dtos = reviews.stream().map(ReviewReturnDto::new).collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 }
