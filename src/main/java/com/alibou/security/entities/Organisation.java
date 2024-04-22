@@ -41,4 +41,9 @@ public class Organisation {
             name = "owner_id"
     )
     private User owner;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Benefit> benefits;
 }

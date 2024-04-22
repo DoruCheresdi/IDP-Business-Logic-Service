@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/OrganisationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/OrganisationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" afterDir="false" />
+    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="added organisation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/BenefitController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/BenefitDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Benefit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/BenefitRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/JwtAuthenticationFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -49,6 +46,9 @@
         <option name="url" value="https://github.com/DoruCheresdi/IDP-Business-Logic-Service.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -77,7 +77,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "eb524415d4aa6a118c669a9f7d14a183",
+    "spring.configuration.checksum": "e91e6348157868de9dd8b25c81aebfb9",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -142,7 +142,8 @@
       <workItem from="1713215751284" duration="2119000" />
       <workItem from="1713219003974" duration="1054000" />
       <workItem from="1713220071335" duration="75000" />
-      <workItem from="1713220178427" duration="34787000" />
+      <workItem from="1713220178427" duration="39589000" />
+      <workItem from="1713803309520" duration="2883000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -200,7 +201,21 @@
       <option name="project" value="LOCAL" />
       <updated>1713722473835</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added organisation">
+      <created>1713742676778</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1713742676778</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added organisation and role claims to token">
+      <created>1713744248509</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1713744248509</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +253,9 @@
     <MESSAGE value="added feedback post and get" />
     <MESSAGE value="fixed getting 403 on all ResponseStatusException exceptions" />
     <MESSAGE value="added put and delete requests" />
-    <option name="LAST_COMMIT_MESSAGE" value="added put and delete requests" />
+    <MESSAGE value="added organisation" />
+    <MESSAGE value="added organisation and role claims to token" />
+    <option name="LAST_COMMIT_MESSAGE" value="added organisation and role claims to token" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
