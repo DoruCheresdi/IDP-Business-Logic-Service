@@ -1,6 +1,7 @@
 package com.alibou.security.controller;
 
 import com.alibou.security.dtos.ChangePasswordRequest;
+import com.alibou.security.dtos.UserReturnDto;
 import com.alibou.security.entities.User;
 import com.alibou.security.service.UserService;
 import jakarta.validation.Valid;
@@ -23,8 +24,8 @@ public class UserController {
 
     @PatchMapping
     public ResponseEntity<?> changePassword(
-          @RequestBody ChangePasswordRequest request,
-          Principal connectedUser
+            @RequestBody ChangePasswordRequest request,
+            Principal connectedUser
     ) {
         userService.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
@@ -32,8 +33,9 @@ public class UserController {
 
     @GetMapping("/paged")
     @PreAuthorize("hasAuthority('admin:read')")
-    public ResponseEntity<Page<User>> findAllUsersPaged(@ParameterObject @Valid Pageable pageable) {
+    public ResponseEntity<Page<UserReturnDto>> findAllUsersPaged(@ParameterObject @Valid Pageable pageable) {
         Page<User> users = userService.findAllUsersPaged(pageable);
-        return ResponseEntity.ok(users);
+        Page<UserReturnDto> dtos = users.map(UserReturnDto::new);
+        return ResponseEntity.ok(dtos);
     }
 }

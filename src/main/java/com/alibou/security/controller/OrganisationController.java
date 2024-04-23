@@ -3,6 +3,7 @@ package com.alibou.security.controller;
 import com.alibou.security.dtos.OrganisationDto;
 import com.alibou.security.dtos.OrganisationReturnDto;
 import com.alibou.security.dtos.OrganisationUpdateDto;
+import com.alibou.security.dtos.UserReturnDto;
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.User;
 import com.alibou.security.service.OrganisationService;
@@ -67,8 +68,11 @@ public class OrganisationController {
     }
 
     @GetMapping("/get-all-volunteers/{organisationId}")
-    public ResponseEntity<List<User>> getAllVolunteers(@PathVariable @NotNull Integer organisationId) {
+    public ResponseEntity<List<UserReturnDto>> getAllVolunteers(@PathVariable @NotNull Integer organisationId) {
         List<User> volunteers = organisationService.findAllVolunteers(organisationId);
-        return ResponseEntity.ok(volunteers);
+        List<UserReturnDto> dtos = volunteers.stream()
+                .map(UserReturnDto::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 }
