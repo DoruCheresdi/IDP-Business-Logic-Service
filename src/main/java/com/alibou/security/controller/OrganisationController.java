@@ -1,9 +1,7 @@
 package com.alibou.security.controller;
 
-import com.alibou.security.dtos.OrganisationDto;
-import com.alibou.security.dtos.OrganisationReturnDto;
-import com.alibou.security.dtos.OrganisationUpdateDto;
-import com.alibou.security.dtos.UserReturnDto;
+import com.alibou.security.dtos.*;
+import com.alibou.security.entities.Address;
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.User;
 import com.alibou.security.service.OrganisationService;
@@ -74,5 +72,25 @@ public class OrganisationController {
                 .map(UserReturnDto::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
+    }
+
+    @PostMapping("/{organisationId}/add-address")
+    public ResponseEntity<AddressReturnDto> addAddressToOrganisation(
+            @PathVariable @NotNull Integer organisationId,
+            @RequestBody @Valid AddressDto addressDto
+    ) {
+        Address address = Address.builder()
+                .street(addressDto.getStreet())
+                .city(addressDto.getCity())
+                .postalCode(addressDto.getPostalCode())
+                .country(addressDto.getCountry())
+                .build();
+
+        Address savedAddress = organisationService.addAddressToOrganisation(organisationId, address).getAddresses().stream()
+                .filter(a -> a.getStreet().equals(address.getStreet())) // assuming street is unique to identify the address
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Address not found after saving"));
+
+        return new ResponseEntity<>(new AddressReturnDto(savedAddress), HttpStatus.CREATED);
     }
 }

@@ -33,7 +33,6 @@ public class Organisation {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> volunteers;
 
-
     @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,4 +50,10 @@ public class Organisation {
     @ToString.Exclude
     @OneToMany(mappedBy = "organisationReviewed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviews;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Address> addresses;
+
 }
