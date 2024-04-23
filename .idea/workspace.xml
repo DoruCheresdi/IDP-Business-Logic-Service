@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/AddressDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/AddressReturnDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/AddressRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/OrganisationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/OrganisationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/ManagementController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/advice/MethodArgumentNotValidExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/advice/MethodArgumentNotValidExceptionAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +140,7 @@
       <workItem from="1713219003974" duration="1054000" />
       <workItem from="1713220071335" duration="75000" />
       <workItem from="1713220178427" duration="39589000" />
-      <workItem from="1713803309520" duration="9729000" />
+      <workItem from="1713803309520" duration="12120000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -251,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713910552227</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="added address to organisation">
+      <created>1713911137856</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1713911137856</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +299,8 @@
     <MESSAGE value="added review" />
     <MESSAGE value="added return dtos" />
     <MESSAGE value="added more return dtos" />
-    <option name="LAST_COMMIT_MESSAGE" value="added more return dtos" />
+    <MESSAGE value="added address to organisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added address to organisation" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
