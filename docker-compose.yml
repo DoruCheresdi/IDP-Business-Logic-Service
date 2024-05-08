@@ -4,7 +4,6 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
-      PGDATA: /data/mysql-idp-vol
       MYSQL_DATABASE: idp_mysql
     volumes:
       - mysql-idp-vol:/var/lib/mysql

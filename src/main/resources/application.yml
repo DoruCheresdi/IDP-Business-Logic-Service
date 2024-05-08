@@ -6,11 +6,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+#        format_sql: true
   spring:
     application:
       name: IDP-Business-Logic-Service
@@ -19,6 +19,7 @@ spring:
   sql:
     init:
       continue-on-error: true
+application:
   security:
     jwt:
       secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
