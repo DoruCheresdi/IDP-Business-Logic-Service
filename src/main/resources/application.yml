@@ -5,6 +5,8 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -14,8 +16,6 @@ spring:
   spring:
     application:
       name: IDP-Business-Logic-Service
-
-
   sql:
     init:
       continue-on-error: true
