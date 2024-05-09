@@ -45,7 +45,6 @@ public class ReviewController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> deleteReview(@PathVariable Integer id) {
         reviewService.deleteById(id);
         return ResponseEntity.ok().build();

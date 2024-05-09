@@ -1,15 +1,11 @@
 package com.alibou.security.service;
 
-import com.alibou.security.auth.AuthenticationService;
-import com.alibou.security.dtos.FeedbackRequestDto;
 import com.alibou.security.dtos.OrganisationDto;
 import com.alibou.security.dtos.OrganisationUpdateDto;
 import com.alibou.security.entities.Address;
-import com.alibou.security.entities.Feedback;
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.AddressRepository;
-import com.alibou.security.repository.FeedbackRepository;
 import com.alibou.security.repository.OrganisationRepository;
 import com.alibou.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +26,6 @@ public class OrganisationService {
 
     private final UserRepository userRepository;
 
-    private final AuthenticationService authenticationService;
     private final AddressRepository addressRepository;
 
     public Organisation save(OrganisationDto dto, String userEmail) {

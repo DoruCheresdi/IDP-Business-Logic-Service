@@ -35,7 +35,6 @@ public class BenefitController {
     }
 
     @DeleteMapping()
-    @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> deleteBenefit(@NotNull Integer id) {
         benefitService.deleteById(id);
         return ResponseEntity.ok().build();

@@ -13,17 +13,16 @@ spring:
     properties:
       hibernate:
 #        format_sql: true
-  spring:
-    application:
-      name: IDP-Business-Logic-Service
+  application:
+    name: IDP-Business-Logic-Service
   sql:
     init:
       continue-on-error: true
-application:
   security:
-    jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 86400000 # a day
-      refresh-token:
-        expiration: 604800000 # 7 days
-
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8083/auth/realms/baeldung
+          jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
+server:
+  port: 8081
