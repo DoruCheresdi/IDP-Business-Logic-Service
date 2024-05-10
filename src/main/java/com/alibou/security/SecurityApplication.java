@@ -1,5 +1,7 @@
 package com.alibou.security;
 
+import com.alibou.security.auth.AuthenticationService;
+import com.alibou.security.auth.RegisterRequest;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.boot.CommandLineRunner;
@@ -8,19 +10,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.sql.DataSource;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static com.alibou.security.enums.Role.ADMIN;
+import static com.alibou.security.enums.Role.MANAGER;
+
 
 @SpringBootApplication
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class SecurityApplication {
 
 	public static void main(String[] args) {
@@ -48,55 +50,32 @@ public class SecurityApplication {
 		};
 	}
 
-//	@Bean
-//	CorsConfigurationSource corsConfigurationSource() {
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		CorsConfiguration corsConfiguration = new CorsConfiguration();
-//		corsConfiguration.addAllowedOrigin("*");
-//		corsConfiguration.setAllowCredentials(true);
-////		corsConfiguration.addAllowedOriginPattern("*");
-//		corsConfiguration.setAllowedMethods(Arrays.asList(
-//				HttpMethod.GET.name(),
-//				HttpMethod.HEAD.name(),
-//				HttpMethod.POST.name(),
-//				HttpMethod.PUT.name(),
-//				HttpMethod.DELETE.name()));
-//		corsConfiguration.setMaxAge(1800L);
-//		corsConfiguration.addAllowedHeader("*");
-//		corsConfiguration.addAllowedHeader("*");
-//		corsConfiguration.addAllowedHeader("Content-Type");
-//		corsConfiguration.addAllowedHeader("Authorization");
-////		corsConfiguration.addExposedHeader("header1");
-//		source.registerCorsConfiguration("/**", corsConfiguration); // you restrict your path here
-//		return source;
-//	}
+	@Bean
+	public CommandLineRunner commandLineRunner(
+			AuthenticationService service
+	) {
+		return args -> {
+			try {
+				var admin = RegisterRequest.builder()
+						.firstname("Admin")
+						.lastname("Admin")
+						.email("admin@mail.com")
+						.password("password")
+						.role(ADMIN)
+						.build();
+				System.out.println("Admin token: " + service.register(admin).getAccessToken());
 
-//	@Bean
-//	public CommandLineRunner commandLineRunner(
-//			AuthenticationService service
-//	) {
-//		return args -> {
-//			try {
-//				var admin = RegisterRequest.builder()
-//						.firstname("Admin")
-//						.lastname("Admin")
-//						.email("admin@mail.com")
-//						.password("password")
-//						.role(ADMIN)
-//						.build();
-//				System.out.println("Admin token: " + service.register(admin).getAccessToken());
-//
-//				var manager = RegisterRequest.builder()
-//						.firstname("Admin")
-//						.lastname("Admin")
-//						.email("manager@mail.com")
-//						.password("password")
-//						.role(MANAGER)
-//						.build();
-//				System.out.println("Manager token: " + service.register(manager).getAccessToken());
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		};
-//	}
+				var manager = RegisterRequest.builder()
+						.firstname("Admin")
+						.lastname("Admin")
+						.email("manager@mail.com")
+						.password("password")
+						.role(MANAGER)
+						.build();
+				System.out.println("Manager token: " + service.register(manager).getAccessToken());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		};
+	}
 }

@@ -4,9 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
+    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="revert back to jwt authentication">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/auditing/ApplicationAuditAware.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/auth/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/auth/AuthenticationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/auth/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/auth/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/auth/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/LogoutService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Token.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/TokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/SecurityApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/SecurityApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/MyCustomSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/CustomUserAttrController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/FooController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/FooDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/UserInfoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/authenticationjwt" />
+        <entry key="$PROJECT_DIR$" value="beforeidpwithallchanges" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,30 +78,30 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Doru/Documents/aplicatii licenta/IDP-Business-Logic-Service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "e91e6348157868de9dd8b25c81aebfb9",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Doru/Documents/aplicatii licenta/IDP-Business-Logic-Service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;e91e6348157868de9dd8b25c81aebfb9&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Doru\Documents\aplicatii licenta\IDP-Business-Logic-Service\IDP-Business-Logic-Service" />
@@ -127,6 +149,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.IdpBusinessLogicServiceApplicationTests" />
         <item itemvalue="JUnit.IdpBusinessLogicServiceApplicationTests" />
       </list>
     </recent_temporary>
@@ -349,7 +372,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/authenticationjwt" />
+                        <option value="feature/simpleexternaljwtauth" />
                       </list>
                     </value>
                   </entry>
@@ -362,7 +385,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="moved to root folder" />
     <MESSAGE value="added jwt authentication" />
     <MESSAGE value="reorganised files" />
     <MESSAGE value="reindent files" />
@@ -387,7 +409,8 @@
     <MESSAGE value="fixed cors for post too, disabled csrf, changed NOT_FOUND responses" />
     <MESSAGE value="this fix for cors works too and is simpler" />
     <MESSAGE value="added docker containerizing" />
-    <option name="LAST_COMMIT_MESSAGE" value="added docker containerizing" />
+    <MESSAGE value="revert back to jwt authentication" />
+    <option name="LAST_COMMIT_MESSAGE" value="revert back to jwt authentication" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
