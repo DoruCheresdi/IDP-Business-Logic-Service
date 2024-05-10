@@ -1,5 +1,5 @@
 services:
-  mysql:
+  mysql-idp:
     container_name: mysql-idp
     image: mysql:latest
     environment:
@@ -23,6 +23,18 @@ services:
       - PMA_ARBITRARY=1
     networks:
       - mysql
+
+  idp-business-logic-service:
+    container_name: idp-business-logic-service
+    image: dorucheresdi/idp-business-service
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - mysql
+    restart: unless-stopped
 
 networks:
   mysql:
