@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build-and-push-docker.ps1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
@@ -150,7 +148,7 @@
       <workItem from="1713803309520" duration="15954000" />
       <workItem from="1714217119490" duration="699000" />
       <workItem from="1714510662893" duration="1493000" />
-      <workItem from="1714684959757" duration="28843000" />
+      <workItem from="1714684959757" duration="34227000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -327,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715306970351</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="added docker containerizing">
+      <created>1715365071792</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1715365071792</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +362,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="project innit" />
     <MESSAGE value="moved to root folder" />
     <MESSAGE value="added jwt authentication" />
     <MESSAGE value="reorganised files" />
@@ -382,7 +386,8 @@
     <MESSAGE value="fixed cors, both spring web and spring security have to handle it&#10;&#10;(spring security blocks in flight OPTION requests for cors negociation)" />
     <MESSAGE value="fixed cors for post too, disabled csrf, changed NOT_FOUND responses" />
     <MESSAGE value="this fix for cors works too and is simpler" />
-    <option name="LAST_COMMIT_MESSAGE" value="this fix for cors works too and is simpler" />
+    <MESSAGE value="added docker containerizing" />
+    <option name="LAST_COMMIT_MESSAGE" value="added docker containerizing" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

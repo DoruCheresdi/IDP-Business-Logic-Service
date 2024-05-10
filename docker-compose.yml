@@ -36,6 +36,19 @@ services:
       - mysql
     restart: unless-stopped
 
+# added 127.0.0.1 idp-auth-service to C:\Windows\System32\drivers\etc\hosts :
+  idp-auth-service:
+    container_name: idp-auth-service
+    image: dorucheresdi/idp-auth-service
+    #    build:
+    #      context: .
+    #      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - mysql
+    restart: unless-stopped
+
 networks:
   mysql:
     driver: bridge
