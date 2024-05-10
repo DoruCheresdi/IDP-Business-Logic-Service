@@ -1,14 +1,12 @@
 package com.alibou.security.dtos;
 
 import com.alibou.security.entities.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserReturnDto {
 

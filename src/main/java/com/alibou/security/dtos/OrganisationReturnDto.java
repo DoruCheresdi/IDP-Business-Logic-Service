@@ -2,10 +2,7 @@ package com.alibou.security.dtos;
 
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +10,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class OrganisationReturnDto {
 
