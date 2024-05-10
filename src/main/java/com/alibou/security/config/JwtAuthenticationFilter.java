@@ -1,7 +1,6 @@
 package com.alibou.security.config;
 
 import com.alibou.security.dtos.UserDto;
-import com.alibou.security.repository.TokenRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,7 +28,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
-    private final TokenRepository tokenRepository;
 
     @Value("${authServerUrl}")
     private String authServerUrl;
