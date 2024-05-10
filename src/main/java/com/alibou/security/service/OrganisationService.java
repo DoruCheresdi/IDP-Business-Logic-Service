@@ -30,7 +30,7 @@ public class OrganisationService {
 
     public Organisation save(OrganisationDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
 
         // new feedback:
         var organisation = Organisation.builder()
@@ -47,7 +47,7 @@ public class OrganisationService {
 
     public Organisation findById(Integer id) {
         return organisationRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find resource"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find resource"));
     }
 
     public Page<Organisation> findAllPaged(Pageable pageable) {
@@ -57,7 +57,7 @@ public class OrganisationService {
     public void deleteById(Integer id) {
         Organisation organisation = findById(id);
         if (organisation == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find organisation");
+            throw new ResponseStatusException(BAD_REQUEST, "Unable to find organisation");
         }
 
         organisationRepository.delete(organisation);
@@ -65,10 +65,10 @@ public class OrganisationService {
 
     public void addAsVolunteer(String userEmail, Integer organisationId) {
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
         Organisation organisation = findById(organisationId);
         if (organisation == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find organisation");
+            throw new ResponseStatusException(BAD_REQUEST, "Unable to find organisation");
         }
         organisation.getVolunteers().add(user);
         organisationRepository.save(organisation);
@@ -76,11 +76,11 @@ public class OrganisationService {
 
     public Organisation update(OrganisationUpdateDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
 
         Organisation organisation = findById(dto.getId());
         if (organisation == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find organisation");
+            throw new ResponseStatusException(BAD_REQUEST, "Unable to find organisation");
         }
 
         if (organisation.getOwner().getId() != user.getId()) {
@@ -96,7 +96,7 @@ public class OrganisationService {
     public List<User> findAllVolunteers(Integer organisationId) {
         Organisation organisation = findById(organisationId);
         if (organisation == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find organisation");
+            throw new ResponseStatusException(BAD_REQUEST, "Unable to find organisation");
         }
 
         return organisation.getVolunteers();

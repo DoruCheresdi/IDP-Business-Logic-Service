@@ -13,8 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CONFLICT;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +25,7 @@ public class FeedbackService {
 
     public Feedback save(FeedbackRequestDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
 
         if (user.getFeedback() != null) {
             throw new ResponseStatusException(CONFLICT, "Resource already present");
@@ -46,7 +45,7 @@ public class FeedbackService {
 
     public Feedback update(FeedbackRequestDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
 
         if (user.getFeedback() != null) {
             user.getFeedback().setComments(dto.getComments());
@@ -55,12 +54,12 @@ public class FeedbackService {
             user.getFeedback().setSatisfactionLevelSelect(dto.getSatisfactionLevelSelect());
             feedbackRepository.save(user.getFeedback());
             return user.getFeedback();
-        } else throw new ResponseStatusException(NOT_FOUND, "Unable to find feedback");
+        } else throw new ResponseStatusException(BAD_REQUEST, "Unable to find feedback");
     }
 
     public Feedback findById(Integer id) {
         return feedbackRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find resource"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find resource"));
     }
 
     public List<Feedback> findAll() {
@@ -74,7 +73,7 @@ public class FeedbackService {
     public void deleteById(Integer id) {
         Feedback feedback = findById(id);
         if (feedback == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find feedback");
+            throw new ResponseStatusException(BAD_REQUEST, "Unable to find feedback");
         }
 
         feedbackRepository.delete(feedback);

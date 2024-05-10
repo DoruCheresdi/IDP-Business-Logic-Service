@@ -14,8 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Objects;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+import static org.springframework.http.HttpStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +27,10 @@ public class BenefitService {
 
     public Benefit save(BenefitDto dto, String userEmail) {
         Organisation organisation = organisationRepository.findById(dto.getOrganisationId())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find organisation"));
 
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
         if (!Objects.equals(organisation.getOwner().getId(), user.getId())) {
             throw new ResponseStatusException(UNAUTHORIZED, "You can't save a benefit for an organisation you don't own!");
         }
@@ -47,13 +46,13 @@ public class BenefitService {
 
     public Benefit findById(Integer id) {
         return benefitRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find resource"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find resource"));
     }
 
     public void deleteById(Integer id) {
         Benefit benefit = findById(id);
         if (benefit == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find benefit");
+            throw new ResponseStatusException(BAD_REQUEST, "Unable to find benefit");
         }
 
         benefitRepository.delete(benefit);
@@ -61,7 +60,7 @@ public class BenefitService {
 
     public List<Benefit> findAllBenefitsForOrganisation(Integer organisationId) {
         Organisation organisation = organisationRepository.findById(organisationId)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find organisation"));
 
         return benefitRepository.findAllByOrganisation(organisation);
     }

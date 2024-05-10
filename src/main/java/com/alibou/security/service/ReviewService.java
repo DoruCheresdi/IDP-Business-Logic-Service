@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
@@ -27,10 +28,10 @@ public class ReviewService {
 
     public Review save(ReviewDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
 
         Organisation organisation = organisationRepository.findById(dto.getOrganisationId())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find organisation"));
 
         var review = Review.builder()
                 .title(dto.getTitle())
@@ -45,7 +46,7 @@ public class ReviewService {
 
     public Review findById(Integer id) {
         return reviewRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find review"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find review"));
     }
 
     public Page<Review> findAllPaged(Pageable pageable) {
@@ -59,7 +60,7 @@ public class ReviewService {
 
     public List<Review> findAllByOrganisationId(Integer organisationId) {
         Organisation organisation = organisationRepository.findById(organisationId)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find organisation"));
 
         return reviewRepository.findAllByOrganisationReviewed(organisation);
     }
