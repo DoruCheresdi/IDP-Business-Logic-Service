@@ -1,10 +1,7 @@
 package com.alibou.security;
 
-import com.alibou.security.auth.AuthenticationService;
-import com.alibou.security.auth.RegisterRequest;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DatabaseDriver;
@@ -14,11 +11,8 @@ import org.springframework.jdbc.support.DatabaseStartupValidator;
 
 import javax.sql.DataSource;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static com.alibou.security.enums.Role.ADMIN;
-import static com.alibou.security.enums.Role.MANAGER;
 
 
 @SpringBootApplication
@@ -47,35 +41,6 @@ public class SecurityApplication {
 			Stream.of(jpa)
 					.map(bf::getBeanDefinition)
 					.forEach(it -> it.setDependsOn("databaseStartupValidator"));
-		};
-	}
-
-	@Bean
-	public CommandLineRunner commandLineRunner(
-			AuthenticationService service
-	) {
-		return args -> {
-			try {
-				var admin = RegisterRequest.builder()
-						.firstname("Admin")
-						.lastname("Admin")
-						.email("admin@mail.com")
-						.password("password")
-						.role(ADMIN)
-						.build();
-				System.out.println("Admin token: " + service.register(admin).getAccessToken());
-
-				var manager = RegisterRequest.builder()
-						.firstname("Admin")
-						.lastname("Admin")
-						.email("manager@mail.com")
-						.password("password")
-						.role(MANAGER)
-						.build();
-				System.out.println("Manager token: " + service.register(manager).getAccessToken());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		};
 	}
 }
