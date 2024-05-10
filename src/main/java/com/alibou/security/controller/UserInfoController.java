@@ -13,7 +13,6 @@ import java.util.Map;
 @RestController
 public class UserInfoController {
 
-	@CrossOrigin(origins = "http://localhost:8084")
     @GetMapping("/user/info")
     public Map<String, Object> getUserInfo(@AuthenticationPrincipal Jwt principal) {
 		Map<String, String> map = new Hashtable<String, String>();

@@ -48,28 +48,28 @@ public class SecurityApplication {
 		};
 	}
 
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration corsConfiguration = new CorsConfiguration();
-		corsConfiguration.addAllowedOrigin("http://localhost:8084");
-		corsConfiguration.addAllowedOrigin("http://localhost:8081");
-//		corsConfiguration.addAllowedOriginPattern("*");
-		corsConfiguration.setAllowedMethods(Arrays.asList(
-				HttpMethod.GET.name(),
-				HttpMethod.HEAD.name(),
-				HttpMethod.POST.name(),
-				HttpMethod.PUT.name(),
-				HttpMethod.DELETE.name()));
-		corsConfiguration.setMaxAge(1800L);
-		corsConfiguration.addAllowedHeader("*");
-		corsConfiguration.addAllowedHeader("*");
-		corsConfiguration.addAllowedHeader("Content-Type");
-		corsConfiguration.addAllowedHeader("Authorization");
-//		corsConfiguration.addExposedHeader("header1");
-		source.registerCorsConfiguration("/**", corsConfiguration); // you restrict your path here
-		return source;
-	}
+//	@Bean
+//	CorsConfigurationSource corsConfigurationSource() {
+//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		CorsConfiguration corsConfiguration = new CorsConfiguration();
+//		corsConfiguration.addAllowedOrigin("*");
+//		corsConfiguration.setAllowCredentials(true);
+////		corsConfiguration.addAllowedOriginPattern("*");
+//		corsConfiguration.setAllowedMethods(Arrays.asList(
+//				HttpMethod.GET.name(),
+//				HttpMethod.HEAD.name(),
+//				HttpMethod.POST.name(),
+//				HttpMethod.PUT.name(),
+//				HttpMethod.DELETE.name()));
+//		corsConfiguration.setMaxAge(1800L);
+//		corsConfiguration.addAllowedHeader("*");
+//		corsConfiguration.addAllowedHeader("*");
+//		corsConfiguration.addAllowedHeader("Content-Type");
+//		corsConfiguration.addAllowedHeader("Authorization");
+////		corsConfiguration.addExposedHeader("header1");
+//		source.registerCorsConfiguration("/**", corsConfiguration); // you restrict your path here
+//		return source;
+//	}
 
 //	@Bean
 //	public CommandLineRunner commandLineRunner(

@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/SecurityApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/SecurityApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/MyCustomSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/MyCustomSecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/FeedbackService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/ReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/UserInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/UserInfoController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +146,7 @@
       <workItem from="1713803309520" duration="15954000" />
       <workItem from="1714217119490" duration="699000" />
       <workItem from="1714510662893" duration="1493000" />
-      <workItem from="1714684959757" duration="25440000" />
+      <workItem from="1714684959757" duration="26481000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -314,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715299769681</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fixed cors for post too, disabled csrf, changed NOT_FOUND responses">
+      <created>1715306129441</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1715306129441</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +369,8 @@
     <MESSAGE value="fixed crashing on startup is mysql not up" />
     <MESSAGE value="changed to keycloak auth" />
     <MESSAGE value="fixed cors, both spring web and spring security have to handle it&#10;&#10;(spring security blocks in flight OPTION requests for cors negociation)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed cors, both spring web and spring security have to handle it&#10;&#10;(spring security blocks in flight OPTION requests for cors negociation)" />
+    <MESSAGE value="fixed cors for post too, disabled csrf, changed NOT_FOUND responses" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed cors for post too, disabled csrf, changed NOT_FOUND responses" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
