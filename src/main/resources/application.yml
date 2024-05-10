@@ -19,6 +19,7 @@ spring:
   sql:
     init:
       continue-on-error: true
+
 application:
   security:
     jwt:
@@ -27,6 +28,8 @@ application:
       refresh-token:
         expiration: 604800000 # 7 days
 server:
+  error:
+    include-message: always
   port: 8081
 
 authServerUrl: http://localhost:8083
