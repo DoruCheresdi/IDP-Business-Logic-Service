@@ -2,6 +2,7 @@ package com.alibou.security.config;
 
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.UserRepository;
+import com.alibou.security.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -29,7 +30,6 @@ public class JwtService {
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
 
-    private final UserRepository userRepository;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -40,15 +40,14 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        HashMap<String, Object> customclaims = new HashMap<>();
-
-        User user = userRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new RuntimeException("No user found in generate token"));
-
-        setRolesClaim(user, customclaims);
-        return generateToken(customclaims, userDetails);
-    }
+//    public String generateToken(UserDetails userDetails) {
+//        HashMap<String, Object> customclaims = new HashMap<>();
+//
+//        User user = userService.findByEmail(userDetails.getUsername());
+//
+//        setRolesClaim(user, customclaims);
+//        return generateToken(customclaims, userDetails);
+//    }
 
 
     private void setRolesClaim(User user, HashMap<String, Object> customclaims) {

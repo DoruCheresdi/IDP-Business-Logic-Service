@@ -18,6 +18,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+
     public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
 
         var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
@@ -41,4 +42,5 @@ public class UserService {
     public Page<User> findAllUsersPaged(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
+
 }

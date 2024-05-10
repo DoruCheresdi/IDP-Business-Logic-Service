@@ -29,6 +29,9 @@ application:
 server:
   port: 8081
 
+authServerUrl: http://localhost:8083
+#authServerUrl: http://idp-auth-service:8083
+
 #logging:
 #  level:
 #    root: DEBUG
