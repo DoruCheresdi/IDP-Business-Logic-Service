@@ -13,8 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
-@Getter @Setter
-@RequiredArgsConstructor
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

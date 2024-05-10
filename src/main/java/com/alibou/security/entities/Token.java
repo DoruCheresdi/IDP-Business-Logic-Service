@@ -12,8 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
-@Getter @Setter
-@RequiredArgsConstructor
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
