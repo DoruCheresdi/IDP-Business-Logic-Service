@@ -58,9 +58,7 @@ public class MyCustomSecurityConfiguration {
                         .permitAll()
                         .anyRequest().authenticated()
                 )
-//                .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-//                .cors(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();
     }

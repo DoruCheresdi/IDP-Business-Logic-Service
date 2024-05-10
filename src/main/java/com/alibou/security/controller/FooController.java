@@ -14,7 +14,6 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
 @RestController
 @RequestMapping(value = "/api/foos")
-@CrossOrigin(origins = "http://localhost:8084")
 @RequiredArgsConstructor
 public class FooController {
 
