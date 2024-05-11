@@ -1,6 +1,5 @@
 package com.alibou.security.dtos;
 
-import com.alibou.security.entities.Benefit;
 import lombok.*;
 
 @Getter
@@ -15,10 +14,4 @@ public class BenefitReturnDto {
     private Double priceInLei;
 
     private String name;
-
-    public BenefitReturnDto(Benefit benefit) {
-        this.id = benefit.getId();
-        this.priceInLei = benefit.getPriceInLei();
-        this.name = benefit.getName();
-    }
 }

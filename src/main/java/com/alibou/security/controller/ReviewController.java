@@ -2,7 +2,6 @@ package com.alibou.security.controller;
 
 import com.alibou.security.dtos.ReviewDto;
 import com.alibou.security.dtos.ReviewReturnDto;
-import com.alibou.security.entities.Review;
 import com.alibou.security.service.ReviewService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

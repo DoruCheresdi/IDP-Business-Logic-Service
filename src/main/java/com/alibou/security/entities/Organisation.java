@@ -44,16 +44,6 @@ public class Organisation {
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Benefit> benefits;
-
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "organisationReviewed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Review> reviews;
-
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses;
 
 }

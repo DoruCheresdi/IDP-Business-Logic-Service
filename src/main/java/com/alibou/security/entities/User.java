@@ -53,11 +53,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Organisation> organisationsOwned;
 
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Review> reviews;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role != null) {

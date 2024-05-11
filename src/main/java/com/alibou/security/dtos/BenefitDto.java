@@ -1,5 +1,6 @@
 package com.alibou.security.dtos;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -18,4 +19,7 @@ public class BenefitDto {
 
     @NotNull
     private Integer organisationId;
+
+    @Nullable
+    private String userEmail;
 }
