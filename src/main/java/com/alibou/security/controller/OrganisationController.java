@@ -1,8 +1,6 @@
 package com.alibou.security.controller;
 
 import com.alibou.security.dtos.*;
-import com.alibou.security.entities.Organisation;
-import com.alibou.security.entities.User;
 import com.alibou.security.service.OrganisationService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/organisation")

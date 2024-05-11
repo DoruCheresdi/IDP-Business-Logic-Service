@@ -42,17 +42,6 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Feedback feedback;
 
-
-    @JsonIgnore
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "volunteers")
-    private List<Organisation> organisationsVolunteeredFor;
-
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Organisation> organisationsOwned;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role != null) {

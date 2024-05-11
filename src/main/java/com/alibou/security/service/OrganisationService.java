@@ -1,10 +1,6 @@
 package com.alibou.security.service;
 
 import com.alibou.security.dtos.*;
-import com.alibou.security.entities.Organisation;
-import com.alibou.security.entities.User;
-import com.alibou.security.repository.OrganisationRepository;
-import com.alibou.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,13 +10,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.http.HttpStatus.*;
 
 @Service
 @RequiredArgsConstructor
