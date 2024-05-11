@@ -37,11 +37,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Feedback feedback;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role != null) {

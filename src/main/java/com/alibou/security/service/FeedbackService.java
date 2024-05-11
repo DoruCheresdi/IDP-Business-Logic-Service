@@ -1,15 +1,17 @@
 package com.alibou.security.service;
 
+import com.alibou.security.dtos.CustomPageImpl;
 import com.alibou.security.dtos.FeedbackRequestDto;
-import com.alibou.security.entities.Feedback;
-import com.alibou.security.entities.User;
-import com.alibou.security.repository.FeedbackRepository;
-import com.alibou.security.repository.UserRepository;
+import com.alibou.security.dtos.FeedbackReturnDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -19,63 +21,46 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class FeedbackService {
 
-    private final FeedbackRepository feedbackRepository;
+    @Value("${dbServiceUrl}")
+    private String dbServiceUrl;
+    private RestTemplate restTemplate = new RestTemplate();
 
-    private final UserRepository userRepository;
-
-    public Feedback save(FeedbackRequestDto dto, String userEmail) {
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
-
-        if (user.getFeedback() != null) {
-            throw new ResponseStatusException(CONFLICT, "Resource already present");
-        }
-        // new feedback:
-        var feedback = Feedback.builder()
-                .comments(dto.getComments())
-                .improvementsCheckbox(dto.getImprovementsCheckbox())
-                .expectationRadioButton(dto.getExpectationRadioButton())
-                .satisfactionLevelSelect(dto.getSatisfactionLevelSelect())
-                .user(user)
-                .build();
-        user.setFeedback(feedback);
-        userRepository.save(user);
-        return user.getFeedback();
+    public FeedbackReturnDto save(FeedbackRequestDto dto, String userEmail) {
+        dto.setUserEmail(userEmail);
+        return restTemplate.postForObject(dbServiceUrl + "/feedback", dto, FeedbackReturnDto.class);
     }
 
-    public Feedback update(FeedbackRequestDto dto, String userEmail) {
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
-
-        if (user.getFeedback() != null) {
-            user.getFeedback().setComments(dto.getComments());
-            user.getFeedback().setImprovementsCheckbox(dto.getImprovementsCheckbox());
-            user.getFeedback().setExpectationRadioButton(dto.getExpectationRadioButton());
-            user.getFeedback().setSatisfactionLevelSelect(dto.getSatisfactionLevelSelect());
-            feedbackRepository.save(user.getFeedback());
-            return user.getFeedback();
-        } else throw new ResponseStatusException(BAD_REQUEST, "Unable to find feedback");
+    public FeedbackReturnDto update(FeedbackRequestDto dto, String userEmail) {
+        dto.setUserEmail(userEmail);
+        HttpEntity<FeedbackRequestDto> request = new HttpEntity<>(dto);
+        return restTemplate.exchange(
+                dbServiceUrl + "/feedback",
+                HttpMethod.PUT,
+                request,
+                FeedbackReturnDto.class).getBody();
     }
 
-    public Feedback findById(Integer id) {
-        return feedbackRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find resource"));
+    public FeedbackReturnDto findById(Integer id) {
+        return restTemplate.getForObject(dbServiceUrl + "/feedback/" + id, FeedbackReturnDto.class);
     }
 
-    public List<Feedback> findAll() {
-        return feedbackRepository.findAll();
+    public List<FeedbackReturnDto> findAll() {
+        return restTemplate.exchange(
+                dbServiceUrl + "/feedback/all",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<FeedbackReturnDto>>() {}).getBody();
     }
 
-    public Page<Feedback> findAllPaged(Pageable pageable) {
-        return feedbackRepository.findAll(pageable);
+    public Page<FeedbackReturnDto> findAllPaged(Pageable pageable) {
+        return restTemplate.exchange(
+                dbServiceUrl + "/feedback/paged?page=" + pageable.getPageNumber() + "&size=" + pageable.getPageSize(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<CustomPageImpl<FeedbackReturnDto>>() {}).getBody();
     }
 
     public void deleteById(Integer id) {
-        Feedback feedback = findById(id);
-        if (feedback == null) {
-            throw new ResponseStatusException(BAD_REQUEST, "Unable to find feedback");
-        }
-
-        feedbackRepository.delete(feedback);
+        restTemplate.delete(dbServiceUrl + "/feedback/" + id);
     }
 }

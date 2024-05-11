@@ -2,7 +2,6 @@ package com.alibou.security.controller;
 
 import com.alibou.security.dtos.FeedbackRequestDto;
 import com.alibou.security.dtos.FeedbackReturnDto;
-import com.alibou.security.entities.Feedback;
 import com.alibou.security.service.FeedbackService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/feedback")
@@ -28,37 +26,33 @@ public class FeedbackController {
     @PostMapping
     public ResponseEntity<FeedbackReturnDto> save(@RequestBody @Valid FeedbackRequestDto dto,
                                                   Principal connectedUser) {
-        Feedback feedback = feedbackService.save(dto, connectedUser.getName());
-        return new ResponseEntity<>(new FeedbackReturnDto(feedback), HttpStatus.CREATED);
+        FeedbackReturnDto feedback = feedbackService.save(dto, connectedUser.getName());
+        return new ResponseEntity<>(feedback, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<FeedbackReturnDto>> findAllFeedbacks() {
-        List<Feedback> feedbacks = feedbackService.findAll();
-        List<FeedbackReturnDto> dtos = feedbacks.stream()
-                .map(FeedbackReturnDto::new)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+        List<FeedbackReturnDto> feedbacks = feedbackService.findAll();
+        return ResponseEntity.ok(feedbacks);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FeedbackReturnDto> findFeedbackById(@PathVariable @NotNull Integer id) {
-        Feedback feedback = feedbackService.findById(id);
-        return ResponseEntity.ok(new FeedbackReturnDto(feedback));
+        FeedbackReturnDto feedback = feedbackService.findById(id);
+        return ResponseEntity.ok(feedback);
     }
 
     @GetMapping("/paged")
     public ResponseEntity<Page<FeedbackReturnDto>> findAllFeedbacksPaged(@ParameterObject @Valid Pageable pageable) {
-        Page<Feedback> feedbacks = feedbackService.findAllPaged(pageable);
-        Page<FeedbackReturnDto> dtos = feedbacks.map(FeedbackReturnDto::new);
-        return ResponseEntity.ok(dtos);
+        Page<FeedbackReturnDto> feedbacks = feedbackService.findAllPaged(pageable);
+        return ResponseEntity.ok(feedbacks);
     }
 
     @PutMapping
     public ResponseEntity<FeedbackReturnDto> update(@RequestBody @Valid FeedbackRequestDto dto,
                                                     Principal connectedUser) {
-        Feedback feedback = feedbackService.update(dto, connectedUser.getName());
-        return ResponseEntity.ok(new FeedbackReturnDto(feedback));
+        FeedbackReturnDto feedback = feedbackService.update(dto, connectedUser.getName());
+        return ResponseEntity.ok(feedback);
     }
 
     @DeleteMapping("/{id}")

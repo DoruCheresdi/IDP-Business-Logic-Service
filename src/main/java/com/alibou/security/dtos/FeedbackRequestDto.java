@@ -1,5 +1,6 @@
 package com.alibou.security.dtos;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -21,4 +22,7 @@ public class FeedbackRequestDto {
 
     @NotNull
     private String improvementsCheckbox;
+
+    @Nullable
+    private String userEmail;
 }
