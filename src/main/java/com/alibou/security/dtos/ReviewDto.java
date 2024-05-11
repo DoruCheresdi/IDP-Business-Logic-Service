@@ -1,5 +1,6 @@
 package com.alibou.security.dtos;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -28,4 +29,7 @@ public class ReviewDto {
 
     @NotNull(message = "Organisation ID cannot be null")
     private Integer organisationId;
+
+    @Nullable
+    private String userEmail;
 }

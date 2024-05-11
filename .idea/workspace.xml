@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
+    <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="added review requests with db service">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/CustomPageImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/ReviewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/ReviewDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/ReviewRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/repository/TokenRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/ReviewService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +87,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.alibou.security.service" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Doru\Documents\aplicatii licenta\IDP-Business-Logic-Service\IDP-Business-Logic-Service" />
     </key>
@@ -370,7 +379,21 @@
       <option name="project" value="LOCAL" />
       <updated>1715384489110</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="added token validation errors, they go into the message now">
+      <created>1715385349761</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1715385349761</updated>
+    </task>
+    <task id="LOCAL-00033" summary="removed reference to tokenrepository">
+      <created>1715385458601</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1715385458601</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,8 +423,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed getting 403 on all ResponseStatusException exceptions" />
-    <MESSAGE value="added put and delete requests" />
     <MESSAGE value="added organisation" />
     <MESSAGE value="added organisation and role claims to token" />
     <MESSAGE value="added benefit" />
@@ -425,7 +446,9 @@
     <MESSAGE value="moved authentication to auth service" />
     <MESSAGE value="added user retrieval from auth" />
     <MESSAGE value="added token isValid request" />
-    <option name="LAST_COMMIT_MESSAGE" value="added token isValid request" />
+    <MESSAGE value="added token validation errors, they go into the message now" />
+    <MESSAGE value="removed reference to tokenrepository" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed reference to tokenrepository" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

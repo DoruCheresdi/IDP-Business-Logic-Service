@@ -1,71 +1,63 @@
 package com.alibou.security.service;
 
+import com.alibou.security.dtos.CustomPageImpl;
 import com.alibou.security.dtos.ReviewDto;
-import com.alibou.security.entities.Organisation;
-import com.alibou.security.entities.Review;
-import com.alibou.security.entities.User;
-import com.alibou.security.repository.OrganisationRepository;
-import com.alibou.security.repository.ReviewRepository;
-import com.alibou.security.repository.UserRepository;
+import com.alibou.security.dtos.ReviewReturnDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
+    private final RestTemplate restTemplate = new RestTemplate();
 
-    private final ReviewRepository reviewRepository;
-    private final OrganisationRepository organisationRepository;
-    private final UserRepository userRepository;
+    @Value("${dbServiceUrl}")
+    private String dbServiceUrl;
 
-    public Review save(ReviewDto dto, String userEmail) {
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find user"));
+    public ReviewReturnDto save(ReviewDto dto, String userEmail) {
+        dto.setUserEmail(userEmail);
 
-        Organisation organisation = organisationRepository.findById(dto.getOrganisationId())
-                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find organisation"));
-
-        var review = Review.builder()
-                .title(dto.getTitle())
-                .description(dto.getDescription())
-                .stars(dto.getStars())
-                .reviewer(user)
-                .organisationReviewed(organisation)
-                .build();
-
-        return reviewRepository.save(review);
+        return restTemplate
+                .postForObject(dbServiceUrl + "/review", dto,  ReviewReturnDto.class);
     }
 
-    public Review findById(Integer id) {
-        return reviewRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find review"));
+    public ReviewReturnDto findById(Integer id) {
+        return restTemplate.getForObject(dbServiceUrl + "/review/" + id, ReviewReturnDto.class);
     }
 
-    public Page<Review> findAllPaged(Pageable pageable) {
-        return reviewRepository.findAll(pageable);
+    public Page<ReviewReturnDto> findAllPaged(Pageable pageable) {
+        return restTemplate.exchange(
+                dbServiceUrl + "/review/paged?page=" + pageable.getPageNumber() + "&size=" + pageable.getPageSize(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<CustomPageImpl<ReviewReturnDto>>() {}).getBody();
     }
 
     public void deleteById(Integer id) {
-        Review review = findById(id);
-        reviewRepository.delete(review);
+        restTemplate.delete(dbServiceUrl + "/review/" + id);
     }
 
-    public List<Review> findAllByOrganisationId(Integer organisationId) {
-        Organisation organisation = organisationRepository.findById(organisationId)
-                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST, "Unable to find organisation"));
-
-        return reviewRepository.findAllByOrganisationReviewed(organisation);
+    public List<ReviewReturnDto> findAllByOrganisationId(Integer organisationId) {
+        return restTemplate.exchange(
+                dbServiceUrl + "/review/by-organisation?organisationId=" + organisationId,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ReviewReturnDto>>() {}).getBody();
     }
 
-    public List<Review> findAllByUserEmail(String userEmail) {
-        return reviewRepository.findAllByReviewerEmail(userEmail);
+    public List<ReviewReturnDto> findAllByUserEmail(String userEmail) {
+        return restTemplate.exchange(
+                dbServiceUrl + "/review/by-user?userEmail=" + userEmail,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ReviewReturnDto>>() {}).getBody();
     }
 }

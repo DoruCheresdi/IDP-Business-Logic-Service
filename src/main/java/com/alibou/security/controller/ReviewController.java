@@ -27,20 +27,19 @@ public class ReviewController {
 
     @PostMapping
     public ResponseEntity<ReviewReturnDto> saveReview(@RequestBody @Valid ReviewDto dto, Principal connectedUser) {
-        Review review = reviewService.save(dto, connectedUser.getName());
-        return new ResponseEntity<>(new ReviewReturnDto(review), HttpStatus.CREATED);
+        ReviewReturnDto review = reviewService.save(dto, connectedUser.getName());
+        return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ReviewReturnDto> getReview(@PathVariable Integer id) {
-        Review review = reviewService.findById(id);
-        return new ResponseEntity<>(new ReviewReturnDto(review), HttpStatus.OK);
+        ReviewReturnDto review = reviewService.findById(id);
+        return new ResponseEntity<>(review, HttpStatus.OK);
     }
 
     @GetMapping("/paged")
     public ResponseEntity<Page<ReviewReturnDto>> findAllReviewsPaged(Pageable pageable) {
-        Page<ReviewReturnDto> reviews = reviewService.findAllPaged(pageable)
-                .map(ReviewReturnDto::new);
+        Page<ReviewReturnDto> reviews = reviewService.findAllPaged(pageable);
         return ResponseEntity.ok(reviews);
     }
 
@@ -52,15 +51,13 @@ public class ReviewController {
 
     @GetMapping("/by-organisation")
     public ResponseEntity<List<ReviewReturnDto>> findAllReviewsByOrganisation(@NotNull Integer organisationId) {
-        List<Review> reviews = reviewService.findAllByOrganisationId(organisationId);
-        List<ReviewReturnDto> dtos = reviews.stream().map(ReviewReturnDto::new).collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+        List<ReviewReturnDto> reviews = reviewService.findAllByOrganisationId(organisationId);
+        return ResponseEntity.ok(reviews);
     }
 
     @GetMapping("/by-user")
     public ResponseEntity<List<ReviewReturnDto>> findAllReviewsByUser(@RequestParam String userEmail) {
-        List<Review> reviews = reviewService.findAllByUserEmail(userEmail);
-        List<ReviewReturnDto> dtos = reviews.stream().map(ReviewReturnDto::new).collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+        List<ReviewReturnDto> reviews = reviewService.findAllByUserEmail(userEmail);
+        return ResponseEntity.ok(reviews);
     }
 }
