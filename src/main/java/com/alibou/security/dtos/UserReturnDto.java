@@ -1,6 +1,5 @@
 package com.alibou.security.dtos;
 
-import com.alibou.security.entities.User;
 import lombok.*;
 
 @Getter
@@ -15,10 +14,4 @@ public class UserReturnDto {
     private String lastname;
 
     private String email;
-
-    public UserReturnDto(User user) {
-        this.firstname = user.getFirstname();
-        this.lastname = user.getLastname();
-        this.email = user.getEmail();
-    }
 }

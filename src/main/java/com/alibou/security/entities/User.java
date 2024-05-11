@@ -1,12 +1,10 @@
 package com.alibou.security.entities;
 
 import com.alibou.security.enums.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,8 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "_user")
 public class User implements UserDetails {
 
     @Id
@@ -32,10 +28,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user")
-    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
