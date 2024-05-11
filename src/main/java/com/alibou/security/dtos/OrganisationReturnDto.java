@@ -1,11 +1,8 @@
 package com.alibou.security.dtos;
 
-import com.alibou.security.entities.Organisation;
-import com.alibou.security.entities.User;
 import lombok.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -22,13 +19,5 @@ public class OrganisationReturnDto {
 
     private String description;
 
-    private List<User> volunteers;
-
-    public OrganisationReturnDto(Organisation organisation) {
-        this.id = organisation.getId();
-        this.name = organisation.getName();
-        this.iban = organisation.getIban();
-        this.description = organisation.getDescription();
-        this.volunteers = organisation.getVolunteers();
-    }
+    private List<UserReturnDto> volunteers;
 }

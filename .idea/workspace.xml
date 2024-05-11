@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/AddVolunteerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/OrganisationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/OrganisationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationReturnDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationReturnDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationUpdateDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -401,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715433569200</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="removed address">
+      <created>1715433947447</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1715433947447</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +442,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added benefit" />
     <MESSAGE value="changed benefit creation logic, added return dtos" />
     <MESSAGE value="added review" />
     <MESSAGE value="added return dtos" />
@@ -456,7 +466,8 @@
     <MESSAGE value="removed reference to tokenrepository" />
     <MESSAGE value="added review requests with db service" />
     <MESSAGE value="removed benefit" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed benefit" />
+    <MESSAGE value="removed address" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed address" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1713658110188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

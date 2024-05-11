@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -26,22 +25,22 @@ public class OrganisationController {
 
     private final OrganisationService organisationService;
 
+
     @PostMapping
-    public ResponseEntity<OrganisationReturnDto> saveOrganisation(@RequestBody @Valid OrganisationDto dto,
-                                                                  Principal connectedUser) {
-        Organisation organisation = organisationService.save(dto, connectedUser.getName());
-        return new ResponseEntity<>(new OrganisationReturnDto(organisation), HttpStatus.CREATED);
+    public ResponseEntity<OrganisationReturnDto> saveOrganisation(@RequestBody @Valid OrganisationDto dto, Principal connectedUser) {
+        OrganisationReturnDto organisation = organisationService.save(dto, connectedUser.getName());
+        return new ResponseEntity<>(organisation, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<OrganisationReturnDto> getOrganisation(@PathVariable @NotNull Integer id) {
-        Organisation organisation = organisationService.findById(id);
-        return new ResponseEntity<>(new OrganisationReturnDto(organisation), HttpStatus.OK);
+        OrganisationReturnDto organisation = organisationService.findById(id);
+        return new ResponseEntity<>(organisation, HttpStatus.OK);
     }
 
     @GetMapping("/paged")
     public ResponseEntity<Page<OrganisationReturnDto>> findAllOrganisationsPaged(@ParameterObject @Valid Pageable pageable) {
-        return ResponseEntity.ok(organisationService.findAllPaged(pageable).map(OrganisationReturnDto::new));
+        return ResponseEntity.ok(organisationService.findAllPaged(pageable));
     }
 
     @DeleteMapping("/{id}")
@@ -57,19 +56,15 @@ public class OrganisationController {
     }
 
     @PutMapping
-    public ResponseEntity<OrganisationReturnDto> updateOrganisation(@RequestBody @Valid OrganisationUpdateDto dto,
-                                                                    Principal connectedUser) {
-        Organisation organisation = organisationService.update(dto, connectedUser.getName());
-        return ResponseEntity.ok(new OrganisationReturnDto(organisation));
+    public ResponseEntity<OrganisationReturnDto> updateOrganisation(@RequestBody @Valid OrganisationUpdateDto dto, Principal connectedUser) {
+        OrganisationReturnDto organisation = organisationService.update(dto, connectedUser.getName());
+        return ResponseEntity.ok(organisation);
     }
 
     @GetMapping("/get-all-volunteers/{organisationId}")
     public ResponseEntity<List<UserReturnDto>> getAllVolunteers(@PathVariable @NotNull Integer organisationId) {
-        List<User> volunteers = organisationService.findAllVolunteers(organisationId);
-        List<UserReturnDto> dtos = volunteers.stream()
-                .map(UserReturnDto::new)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+        List<UserReturnDto> volunteers = organisationService.findAllVolunteers(organisationId);
+        return ResponseEntity.ok(volunteers);
     }
 
     @PostMapping("/{organisationId}/add-address")
