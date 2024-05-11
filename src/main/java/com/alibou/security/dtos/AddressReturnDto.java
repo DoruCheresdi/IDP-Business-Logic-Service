@@ -1,6 +1,5 @@
 package com.alibou.security.dtos;
 
-import com.alibou.security.entities.Address;
 import lombok.*;
 
 @Getter
@@ -20,11 +19,4 @@ public class AddressReturnDto {
 
     private String country;
 
-    public AddressReturnDto(Address address) {
-        this.id = address.getId();
-        this.street = address.getStreet();
-        this.city = address.getCity();
-        this.postalCode = address.getPostalCode();
-        this.country = address.getCountry();
-    }
 }

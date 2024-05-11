@@ -1,20 +1,24 @@
 package com.alibou.security.service;
 
+import com.alibou.security.dtos.AddressDto;
+import com.alibou.security.dtos.AddressReturnDto;
 import com.alibou.security.dtos.OrganisationDto;
 import com.alibou.security.dtos.OrganisationUpdateDto;
-import com.alibou.security.entities.Address;
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.User;
-import com.alibou.security.repository.AddressRepository;
 import com.alibou.security.repository.OrganisationRepository;
 import com.alibou.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -22,11 +26,13 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class OrganisationService {
 
+    @Value("${dbServiceUrl}")
+    private String dbServiceUrl;
+    private RestTemplate restTemplate = new RestTemplate();
+
     private final OrganisationRepository organisationRepository;
 
     private final UserRepository userRepository;
-
-    private final AddressRepository addressRepository;
 
     public Organisation save(OrganisationDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
@@ -102,15 +108,10 @@ public class OrganisationService {
         return organisation.getVolunteers();
     }
 
-    public Organisation addAddressToOrganisation(Integer organisationId, Address address) {
-        Organisation organisation = organisationRepository.findById(organisationId)
-                .orElseThrow(() -> new RuntimeException("Organisation not found"));
-
-        address.setOrganisation(organisation);
-        addressRepository.save(address);
-
-        organisation.getAddresses().add(address);
-        return organisationRepository.save(organisation);
+    public AddressReturnDto addAddressToOrganisation(Integer organisationId, AddressDto addressDto) {
+        Map<String, Integer> params = new HashMap<>();
+        params.put("organisationId", organisationId);
+        return restTemplate.postForObject(dbServiceUrl + "/organisation/add-address", addressDto, AddressReturnDto.class, params);
     }
 
 }

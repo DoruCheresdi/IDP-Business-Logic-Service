@@ -41,9 +41,4 @@ public class Organisation {
     )
     private User owner;
 
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Address> addresses;
-
 }
