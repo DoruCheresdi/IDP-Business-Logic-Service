@@ -1,3 +1,4 @@
+# scp .\docker-stack.yml ip172-18-0-24-cp01uciim2rg00dcgn1g@direct.labs.play-with-docker.com:~
 services:
   mysql-idp:
     container_name: mysql-idp
