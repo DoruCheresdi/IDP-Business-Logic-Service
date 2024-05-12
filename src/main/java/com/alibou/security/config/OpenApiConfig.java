@@ -34,7 +34,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 @Server(
                         description = "PROD ENV",
                         url = "https://aliboucoding.com/course"
-                )
+                ),
+                @Server(url = "/", description = "Default Server URL")
         },
         security = {
                 @SecurityRequirement(

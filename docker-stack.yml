@@ -1,0 +1,92 @@
+services:
+  mysql-idp:
+    container_name: mysql-idp
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: idp_mysql
+    volumes:
+      - mysql-idp-vol:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql-db-interface
+      - mysql-phpmyadmin
+      - mysql-idp-auth-service
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - "node.role==manager"
+
+
+
+  phpmyadmin: # must connect to host mysql-idp:3306
+    container_name: phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8089:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - mysql-phpmyadmin
+
+  idp-business-logic-service:
+    container_name: idp-business-logic-service
+    image: dorucheresdi/idp-business-service
+    #    build:
+    #      context: .
+    #      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - idp-business-logic-service-idp-bd-interface-service
+      - idp-business-logic-service-idp-auth-service
+    restart: unless-stopped
+    deploy:
+      replicas: 1
+
+
+  # added 127.0.0.1 idp-auth-service to C:\Windows\System32\drivers\etc\hosts :
+  idp-auth-service:
+    container_name: idp-auth-service
+    image: dorucheresdi/idp-auth-service
+    #    build:
+    #      context: .
+    #      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - idp-business-logic-service-idp-auth-service
+      - mysql-idp-auth-service
+    restart: unless-stopped
+    deploy:
+      replicas: 1
+
+
+  idp-bd-interface-service:
+    container_name: idp-bd-interface-service
+    image: dorucheresdi/idp-bd-interface-service
+    #    build:
+    #      context: .
+    #      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - mysql-db-interface
+      - idp-business-logic-service-idp-bd-interface-service
+    restart: unless-stopped
+    deploy:
+      replicas: 1
+
+networks:
+  mysql-db-interface:
+  mysql-phpmyadmin:
+  mysql-idp-auth-service:
+  idp-business-logic-service-idp-bd-interface-service:
+  idp-business-logic-service-idp-auth-service:
+
+volumes:
+  mysql-idp-vol:
+  pgadmin:
