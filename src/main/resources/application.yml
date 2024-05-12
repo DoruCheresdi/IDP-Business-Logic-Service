@@ -1,24 +1,24 @@
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/idp_mysql
+#spring:
+#  datasource:
+##    url: jdbc:mysql://localhost:3306/idp_mysql
 #    url: jdbc:mysql://mysql-idp:3306/idp_mysql
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-#        format_sql: true
-  application:
-    name: IDP-Business-Logic-Service
-  sql:
-    init:
-      continue-on-error: true
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    database: mysql
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+##        format_sql: true
+#  application:
+#    name: IDP-Business-Logic-Service
+#  sql:
+#    init:
+#      continue-on-error: true
 
 application:
   security:
@@ -32,9 +32,10 @@ server:
     include-message: always
   port: 8081
 
-authServerUrl: http://localhost:8083
-dbServiceUrl: http://localhost:8082
-#authServerUrl: http://idp-auth-service:8083
+#authServerUrl: http://localhost:8083
+#dbServiceUrl: http://localhost:8082
+authServerUrl: http://idp-auth-service:8083
+dbServiceUrl: http://idp-bd-interface-service:8082
 
 #logging:
 #  level:

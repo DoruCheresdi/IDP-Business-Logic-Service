@@ -1,6 +1,5 @@
 package com.alibou.security.config;
 
-import com.alibou.security.auditing.ApplicationAuditAware;
 import com.alibou.security.dtos.UserDto;
 import com.alibou.security.entities.User;
 import lombok.RequiredArgsConstructor;
@@ -51,11 +50,6 @@ public class ApplicationConfig {
     authProvider.setUserDetailsService(userDetailsService());
     authProvider.setPasswordEncoder(passwordEncoder());
     return authProvider;
-  }
-
-  @Bean
-  public AuditorAware<Integer> auditorAware() {
-    return new ApplicationAuditAware();
   }
 
   @Bean

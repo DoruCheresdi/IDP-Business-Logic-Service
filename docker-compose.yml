@@ -10,10 +10,13 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - mysql
+      - mysql-db-interface
+      - mysql-phpmyadmin
+      - mysql-idp-auth-service
     restart: unless-stopped
 
-  phpmyadmin: # must connect to host 172.17.0.2:3306
+
+  phpmyadmin: # must connect to host mysql-idp:3306
     container_name: phpmyadmin
     image: phpmyadmin
     restart: always
@@ -22,36 +25,56 @@ services:
     environment:
       - PMA_ARBITRARY=1
     networks:
-      - mysql
+      - mysql-phpmyadmin
 
-#  idp-business-logic-service:
-#    container_name: idp-business-logic-service
-#    image: dorucheresdi/idp-business-service
-##    build:
-##      context: .
-##      dockerfile: Dockerfile
-#    ports:
-#      - "8081:8081"
-#    networks:
-#      - mysql
-#    restart: unless-stopped
-#
-## added 127.0.0.1 idp-auth-service to C:\Windows\System32\drivers\etc\hosts :
-#  idp-auth-service:
-#    container_name: idp-auth-service
-#    image: dorucheresdi/idp-auth-service
-#    #    build:
-#    #      context: .
-#    #      dockerfile: Dockerfile
-#    ports:
-#      - "8083:8083"
-#    networks:
-#      - mysql
-#    restart: unless-stopped
+  idp-business-logic-service:
+    container_name: idp-business-logic-service
+    image: dorucheresdi/idp-business-service
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - idp-business-logic-service-idp-bd-interface-service
+      - idp-business-logic-service-idp-auth-service
+    restart: unless-stopped
+
+
+# added 127.0.0.1 idp-auth-service to C:\Windows\System32\drivers\etc\hosts :
+  idp-auth-service:
+    container_name: idp-auth-service
+    image: dorucheresdi/idp-auth-service
+    #    build:
+    #      context: .
+    #      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - idp-business-logic-service-idp-auth-service
+      - mysql-idp-auth-service
+    restart: unless-stopped
+
+
+  idp-bd-interface-service:
+    container_name: idp-bd-interface-service
+    image: dorucheresdi/idp-bd-interface-service
+    #    build:
+    #      context: .
+    #      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - mysql-db-interface
+      - idp-business-logic-service-idp-bd-interface-service
+    restart: unless-stopped
 
 networks:
-  mysql:
-    driver: bridge
+  mysql-db-interface:
+  mysql-phpmyadmin:
+  mysql-idp-auth-service:
+  idp-business-logic-service-idp-bd-interface-service:
+  idp-business-logic-service-idp-auth-service:
 
 volumes:
   mysql-idp-vol:
