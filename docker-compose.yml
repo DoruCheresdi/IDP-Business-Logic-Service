@@ -13,16 +13,16 @@ services:
       - mysql
     restart: unless-stopped
 
-  phpmyadmin: # must connect to host 172.17.0.2:3306
-    container_name: phpmyadmin
-    image: phpmyadmin
-    restart: always
-    ports:
-      - 8089:80
-    environment:
-      - PMA_ARBITRARY=1
-    networks:
-      - mysql
+#  phpmyadmin: # must connect to host 172.17.0.2:3306
+#    container_name: phpmyadmin
+#    image: phpmyadmin
+#    restart: always
+#    ports:
+#      - 8089:80
+#    environment:
+#      - PMA_ARBITRARY=1
+#    networks:
+#      - mysql
 
 networks:
   mysql:
