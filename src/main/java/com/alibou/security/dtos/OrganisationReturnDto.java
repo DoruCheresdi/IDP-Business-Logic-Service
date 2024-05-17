@@ -22,13 +22,15 @@ public class OrganisationReturnDto {
 
     private String description;
 
-    private List<User> volunteers;
+    private List<UserReturnDto> volunteers;
 
     public OrganisationReturnDto(Organisation organisation) {
         this.id = organisation.getId();
         this.name = organisation.getName();
         this.iban = organisation.getIban();
         this.description = organisation.getDescription();
-        this.volunteers = organisation.getVolunteers();
+        if (organisation.getVolunteers() != null) {
+            this.volunteers = organisation.getVolunteers().stream().map(UserReturnDto::new).collect(Collectors.toList());
+        }
     }
 }
