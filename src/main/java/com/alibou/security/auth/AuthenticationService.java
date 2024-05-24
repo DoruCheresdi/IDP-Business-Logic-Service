@@ -2,6 +2,7 @@ package com.alibou.security.auth;
 
 import com.alibou.security.config.JwtService;
 import com.alibou.security.entities.Token;
+import com.alibou.security.enums.Role;
 import com.alibou.security.repository.TokenRepository;
 import com.alibou.security.enums.TokenType;
 import com.alibou.security.entities.User;
@@ -31,6 +32,10 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        if (request.getRole() == null) {
+            request.setRole(Role.valueOf("USER"));
+        }
+
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
