@@ -29,7 +29,8 @@ public class FeedbackService {
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
 
         if (user.getFeedback() != null) {
-            throw new ResponseStatusException(CONFLICT, "Resource already present");
+//            throw new ResponseStatusException(CONFLICT, "Resource already present");
+            return this.update(dto, userEmail);
         }
         // new feedback:
         var feedback = Feedback.builder()
@@ -61,6 +62,12 @@ public class FeedbackService {
     public Feedback findById(Integer id) {
         return feedbackRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find resource"));
+    }
+
+    public Feedback findLastUserFeedback(String userEmail) {
+        return userRepository.findByEmail(userEmail)
+                .map(User::getFeedback)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find feedback"));
     }
 
     public List<Feedback> findAll() {

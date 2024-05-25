@@ -47,6 +47,12 @@ public class FeedbackController {
         return ResponseEntity.ok(new FeedbackReturnDto(feedback));
     }
 
+    @GetMapping("/last")
+    public ResponseEntity<FeedbackReturnDto> findLastFeedback(Principal connectedUser) {
+        Feedback feedback = feedbackService.findLastUserFeedback(connectedUser.getName());
+        return ResponseEntity.ok(new FeedbackReturnDto(feedback));
+    }
+
     @GetMapping("/paged")
     public ResponseEntity<Page<FeedbackReturnDto>> findAllFeedbacksPaged(@ParameterObject @Valid Pageable pageable) {
         Page<Feedback> feedbacks = feedbackService.findAllPaged(pageable);
