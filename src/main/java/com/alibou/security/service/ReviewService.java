@@ -1,6 +1,7 @@
 package com.alibou.security.service;
 
 import com.alibou.security.dtos.ReviewDto;
+import com.alibou.security.dtos.ReviewUpdateDto;
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.Review;
 import com.alibou.security.entities.User;
@@ -10,6 +11,7 @@ import com.alibou.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -52,6 +54,10 @@ public class ReviewService {
         return reviewRepository.findAll(pageable);
     }
 
+    public List<Review> findAll() {
+        return reviewRepository.findAll();
+    }
+
     public void deleteById(Integer id) {
         Review review = findById(id);
         reviewRepository.delete(review);
@@ -66,5 +72,20 @@ public class ReviewService {
 
     public List<Review> findAllByUserEmail(String userEmail) {
         return reviewRepository.findAllByReviewerEmail(userEmail);
+    }
+
+    public Review update(ReviewUpdateDto dto, String userEmail) {
+        Review review = reviewRepository.findById(dto.getId())
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find review"));
+
+        if (!review.getReviewer().getEmail().equals(userEmail)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not allowed to update this review");
+        }
+
+        review.setTitle(dto.getTitle());
+        review.setDescription(dto.getDescription());
+        review.setStars(dto.getStars());
+
+        return reviewRepository.save(review);
     }
 }

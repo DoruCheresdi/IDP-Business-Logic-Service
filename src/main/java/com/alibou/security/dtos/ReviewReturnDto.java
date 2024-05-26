@@ -18,10 +18,17 @@ public class ReviewReturnDto {
 
     private String description;
 
+    private Integer orgId;
+
     public ReviewReturnDto(Review review) {
         this.id = review.getId();
         this.stars = review.getStars();
         this.title = review.getTitle();
         this.description = review.getDescription();
+        if (review.getOrganisationReviewed() != null) {
+            this.orgId = review.getOrganisationReviewed().getId();
+        } else {
+            this.orgId = null;
+        }
     }
 }

@@ -43,17 +43,17 @@ public class Organisation {
 
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Benefit> benefits;
 
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "organisationReviewed", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organisationReviewed", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Review> reviews;
 
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Address> addresses;
 
 }

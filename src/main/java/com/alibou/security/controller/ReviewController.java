@@ -2,6 +2,7 @@ package com.alibou.security.controller;
 
 import com.alibou.security.dtos.ReviewDto;
 import com.alibou.security.dtos.ReviewReturnDto;
+import com.alibou.security.dtos.ReviewUpdateDto;
 import com.alibou.security.entities.Review;
 import com.alibou.security.service.ReviewService;
 import jakarta.validation.Valid;
@@ -37,11 +38,25 @@ public class ReviewController {
         return new ResponseEntity<>(new ReviewReturnDto(review), HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ReviewReturnDto> updateReview(@RequestBody @Valid ReviewUpdateDto dto,
+                                                        Principal connectedUser) {
+        Review review = reviewService.update(dto, connectedUser.getName());
+        return new ResponseEntity<>(new ReviewReturnDto(review), HttpStatus.OK);
+    }
+
     @GetMapping("/paged")
     public ResponseEntity<Page<ReviewReturnDto>> findAllReviewsPaged(Pageable pageable) {
         Page<ReviewReturnDto> reviews = reviewService.findAllPaged(pageable)
                 .map(ReviewReturnDto::new);
         return ResponseEntity.ok(reviews);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ReviewReturnDto>> findAllReviews() {
+        List<Review> reviews = reviewService.findAll();
+        List<ReviewReturnDto> dtos = reviews.stream().map(ReviewReturnDto::new).collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 
     @DeleteMapping("/{id}")
