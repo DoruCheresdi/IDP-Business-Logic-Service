@@ -45,6 +45,11 @@ public class OrganisationController {
         return ResponseEntity.ok(organisationService.findAllPaged(pageable).map(OrganisationReturnDto::new));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<OrganisationReturnDto>> findAllOrganisationsPaged() {
+        return ResponseEntity.ok(organisationService.findAll().stream().map(OrganisationReturnDto::new).toList());
+    }
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> deleteOrganisation(@PathVariable @NotNull Integer id) {

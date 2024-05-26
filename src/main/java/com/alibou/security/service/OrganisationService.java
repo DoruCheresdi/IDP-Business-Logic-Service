@@ -59,6 +59,10 @@ public class OrganisationService {
         return organisationRepository.findAll(pageable);
     }
 
+    public List<Organisation> findAll() {
+        return organisationRepository.findAll();
+    }
+
     public void deleteById(Integer id) {
         Organisation organisation = findById(id);
         if (organisation == null) {
