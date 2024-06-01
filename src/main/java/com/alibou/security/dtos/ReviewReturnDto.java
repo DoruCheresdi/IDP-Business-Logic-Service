@@ -18,7 +18,7 @@ public class ReviewReturnDto {
 
     private String description;
 
-    private Integer orgId;
+    private Integer organisationId;
 
     public ReviewReturnDto(Review review) {
         this.id = review.getId();
@@ -26,9 +26,9 @@ public class ReviewReturnDto {
         this.title = review.getTitle();
         this.description = review.getDescription();
         if (review.getOrganisationReviewed() != null) {
-            this.orgId = review.getOrganisationReviewed().getId();
+            this.organisationId = review.getOrganisationReviewed().getId();
         } else {
-            this.orgId = null;
+            this.organisationId = null;
         }
     }
 }

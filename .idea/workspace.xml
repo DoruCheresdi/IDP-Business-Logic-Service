@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/ReviewUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationApprovalDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/OrganisationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/OrganisationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationReturnDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationReturnDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/ReviewReturnDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/ReviewReturnDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Organisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/ReviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/OrganisationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,27 +61,27 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Doru/Documents/aplicatii licenta/IDP-Business-Logic-Service&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;e91e6348157868de9dd8b25c81aebfb9&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Doru/Documents/aplicatii licenta/IDP-Business-Logic-Service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "spring.configuration.checksum": "e91e6348157868de9dd8b25c81aebfb9",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Doru\Documents\aplicatii licenta\IDP-Business-Logic-Service\IDP-Business-Logic-Service" />
@@ -150,7 +150,9 @@
       <workItem from="1714684959757" duration="5806000" />
       <workItem from="1716492672308" duration="1210000" />
       <workItem from="1716573068360" duration="3286000" />
-      <workItem from="1716650731588" duration="10533000" />
+      <workItem from="1716650731588" duration="12815000" />
+      <workItem from="1716935292812" duration="460000" />
+      <workItem from="1717259276974" duration="4872000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -329,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716758154208</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="added some review endpoints, orphan removal for org and user tho not actually needed">
+      <option name="closed" value="true" />
+      <created>1716760267637</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1716760267637</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,7 +356,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/authenticationjwt" />
+                        <option value="feature/simpleexternaljwtauth" />
                       </list>
                     </value>
                   </entry>
@@ -359,7 +369,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="moved to root folder" />
     <MESSAGE value="added jwt authentication" />
     <MESSAGE value="reorganised files" />
     <MESSAGE value="reindent files" />
@@ -384,7 +393,8 @@
     <MESSAGE value="fixed register" />
     <MESSAGE value="added last feedback endpoint" />
     <MESSAGE value="added org all request" />
-    <option name="LAST_COMMIT_MESSAGE" value="added org all request" />
+    <MESSAGE value="added some review endpoints, orphan removal for org and user tho not actually needed" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some review endpoints, orphan removal for org and user tho not actually needed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1716655382228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

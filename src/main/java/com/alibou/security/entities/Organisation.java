@@ -18,11 +18,16 @@ public class Organisation {
     @GeneratedValue
     private Integer id;
 
+    @Column(unique = true)
     private String name;
 
     private String iban;
 
+    private String orgLink;
+
     private String description;
+
+    private Boolean isApproved;
 
     @JsonIgnore
     @ToString.Exclude

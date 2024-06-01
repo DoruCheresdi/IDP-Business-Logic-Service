@@ -46,7 +46,7 @@ public class OrganisationController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<OrganisationReturnDto>> findAllOrganisationsPaged() {
+    public ResponseEntity<List<OrganisationReturnDto>> findAllOrganisations() {
         return ResponseEntity.ok(organisationService.findAll().stream().map(OrganisationReturnDto::new).toList());
     }
 
@@ -97,5 +97,12 @@ public class OrganisationController {
                 .orElseThrow(() -> new RuntimeException("Address not found after saving"));
 
         return new ResponseEntity<>(new AddressReturnDto(savedAddress), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/approve")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> approveOrganisation(@RequestBody @Valid OrganisationApprovalDto dto) {
+        organisationService.approveOrganisation(dto);
+        return ResponseEntity.ok().build();
     }
 }

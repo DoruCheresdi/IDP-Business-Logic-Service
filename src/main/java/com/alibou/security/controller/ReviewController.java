@@ -38,7 +38,7 @@ public class ReviewController {
         return new ResponseEntity<>(new ReviewReturnDto(review), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping()
     public ResponseEntity<ReviewReturnDto> updateReview(@RequestBody @Valid ReviewUpdateDto dto,
                                                         Principal connectedUser) {
         Review review = reviewService.update(dto, connectedUser.getName());
