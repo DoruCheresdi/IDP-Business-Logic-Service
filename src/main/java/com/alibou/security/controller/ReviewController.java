@@ -66,8 +66,8 @@ public class ReviewController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/by-organisation")
-    public ResponseEntity<List<ReviewReturnDto>> findAllReviewsByOrganisation(@NotNull Integer organisationId) {
+    @GetMapping("/by-organisation/{organisationId}")
+    public ResponseEntity<List<ReviewReturnDto>> findAllReviewsByOrganisation(@PathVariable @NotNull Integer organisationId) {
         List<Review> reviews = reviewService.findAllByOrganisationId(organisationId);
         List<ReviewReturnDto> dtos = reviews.stream().map(ReviewReturnDto::new).collect(Collectors.toList());
         return ResponseEntity.ok(dtos);

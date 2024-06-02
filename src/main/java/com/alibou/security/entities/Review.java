@@ -20,6 +20,7 @@ public class Review {
 
     private String title;
 
+    @Column(columnDefinition="TEXT")
     private String description;
 
     @JsonIgnore
