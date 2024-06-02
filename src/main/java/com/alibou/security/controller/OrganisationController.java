@@ -105,4 +105,16 @@ public class OrganisationController {
         organisationService.approveOrganisation(dto);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/feature")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> changeOrganisationFeatureStatus(@RequestBody @Valid OrganisationFeaturedDto dto) {
+        organisationService.featureOrganisation(dto);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/all-featured")
+    public ResponseEntity<List<OrganisationReturnDto>> findAllFeaturedOrganisations() {
+        return ResponseEntity.ok(organisationService.findAllFeatured().stream().map(OrganisationReturnDto::new).toList());
+    }
 }

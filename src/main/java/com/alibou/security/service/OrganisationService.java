@@ -1,10 +1,7 @@
 package com.alibou.security.service;
 
 import com.alibou.security.auth.AuthenticationService;
-import com.alibou.security.dtos.FeedbackRequestDto;
-import com.alibou.security.dtos.OrganisationApprovalDto;
-import com.alibou.security.dtos.OrganisationDto;
-import com.alibou.security.dtos.OrganisationUpdateDto;
+import com.alibou.security.dtos.*;
 import com.alibou.security.entities.Address;
 import com.alibou.security.entities.Feedback;
 import com.alibou.security.entities.Organisation;
@@ -44,7 +41,8 @@ public class OrganisationService {
                 .owner(user)
                 .iban(dto.getIban())
                 .description(dto.getDescription())
-                .isApproved(false).build();
+                .isApproved(false)
+                .isFeatured(false).build();
 
         // TODO commented this since it is annoying to have to reauthenticate from swagger:
 //        authenticationService.revokeAllUserTokens(user);
@@ -130,5 +128,17 @@ public class OrganisationService {
 
         organisation.setIsApproved(dto.getIsApproved());
         organisationRepository.save(organisation);
+    }
+
+    public void featureOrganisation(OrganisationFeaturedDto dto) {
+        Organisation organisation = organisationRepository.findById(dto.getId())
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
+
+        organisation.setIsFeatured(dto.getIsFeatured());
+        organisationRepository.save(organisation);
+    }
+
+    public List<Organisation> findAllFeatured() {
+        return organisationRepository.findAllByIsFeatured(true);
     }
 }

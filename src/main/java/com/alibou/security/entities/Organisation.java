@@ -29,6 +29,8 @@ public class Organisation {
 
     private Boolean isApproved;
 
+    private Boolean isFeatured;
+
     @JsonIgnore
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)

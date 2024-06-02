@@ -12,4 +12,6 @@ import java.util.List;
 public interface OrganisationRepository extends JpaRepository<Organisation, Integer>, PagingAndSortingRepository<Organisation, Integer> {
 
     public List<Organisation> findAllByOwner(User owner);
+
+    public List<Organisation> findAllByIsFeatured(Boolean isFeatured);
 }

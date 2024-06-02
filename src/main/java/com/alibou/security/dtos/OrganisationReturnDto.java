@@ -24,6 +24,8 @@ public class OrganisationReturnDto {
 
     private Boolean isApproved;
 
+    private Boolean isFeatured;
+
     private List<UserReturnDto> volunteers;
 
     public OrganisationReturnDto(Organisation organisation) {
@@ -32,6 +34,7 @@ public class OrganisationReturnDto {
         this.iban = organisation.getIban();
         this.description = organisation.getDescription();
         this.isApproved = organisation.getIsApproved();
+        this.isFeatured = organisation.getIsFeatured();
         if (organisation.getVolunteers() != null) {
             this.volunteers = organisation.getVolunteers().stream().map(UserReturnDto::new).collect(Collectors.toList());
         }
