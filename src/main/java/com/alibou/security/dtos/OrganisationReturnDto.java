@@ -28,6 +28,12 @@ public class OrganisationReturnDto {
 
     private List<UserReturnDto> volunteers;
 
+    private Integer ownerId;
+
+    private String ownerEmail;
+
+    private String orgLink;
+
     public OrganisationReturnDto(Organisation organisation) {
         this.id = organisation.getId();
         this.name = organisation.getName();
@@ -35,6 +41,9 @@ public class OrganisationReturnDto {
         this.description = organisation.getDescription();
         this.isApproved = organisation.getIsApproved();
         this.isFeatured = organisation.getIsFeatured();
+        this.ownerId = organisation.getOwner().getId();
+        this.ownerEmail = organisation.getOwner().getEmail();
+        this.orgLink = organisation.getOrgLink();
         if (organisation.getVolunteers() != null) {
             this.volunteers = organisation.getVolunteers().stream().map(UserReturnDto::new).collect(Collectors.toList());
         }

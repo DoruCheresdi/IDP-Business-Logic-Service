@@ -13,8 +13,8 @@ public class OrganisationDto {
     @NotNull
     private String name;
 
-    @NotNull
-    private String iban;
+    private String orgLink;
+
 
     @NotNull
     private String description;

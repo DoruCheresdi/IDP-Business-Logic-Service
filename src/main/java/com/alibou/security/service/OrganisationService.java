@@ -39,7 +39,7 @@ public class OrganisationService {
         var organisation = Organisation.builder()
                 .name(dto.getName())
                 .owner(user)
-                .iban(dto.getIban())
+                .orgLink(dto.getOrgLink())
                 .description(dto.getDescription())
                 .isApproved(false)
                 .isFeatured(false).build();

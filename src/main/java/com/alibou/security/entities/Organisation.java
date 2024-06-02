@@ -25,6 +25,7 @@ public class Organisation {
 
     private String orgLink;
 
+    @Column(columnDefinition="TEXT")
     private String description;
 
     private Boolean isApproved;
