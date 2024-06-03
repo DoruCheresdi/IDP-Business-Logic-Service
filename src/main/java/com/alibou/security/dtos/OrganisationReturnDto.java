@@ -36,6 +36,8 @@ public class OrganisationReturnDto {
 
     private double averageRating;
 
+    private String picture;
+
     public OrganisationReturnDto(Organisation organisation) {
         this.id = organisation.getId();
         this.name = organisation.getName();
@@ -47,6 +49,7 @@ public class OrganisationReturnDto {
         this.ownerEmail = organisation.getOwner().getEmail();
         this.orgLink = organisation.getOrgLink();
         this.averageRating = organisation.getReviews().stream().mapToDouble(Review::getStars).average().orElse(0.0);
+        this.picture = organisation.getPicture();
         if (organisation.getUsersThatFavorited() != null) {
             this.usersThatFavorited = organisation.getUsersThatFavorited().stream().map(UserReturnDto::new).collect(Collectors.toList());
         }
