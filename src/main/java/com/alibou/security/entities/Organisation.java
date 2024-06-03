@@ -36,10 +36,10 @@ public class Organisation {
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "organisation_users",
+            name = "favorited_organisations",
             joinColumns = @JoinColumn(name = "org_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> volunteers;
+    private List<User> usersThatFavorited;
 
     @JsonIgnore
     @ToString.Exclude

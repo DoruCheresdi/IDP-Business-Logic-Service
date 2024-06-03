@@ -57,9 +57,15 @@ public class OrganisationController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/add-volunteer")
-    public ResponseEntity<?> addAsVolunteer(Principal connectedUser, @NotNull Integer organisationId) {
-        organisationService.addAsVolunteer(connectedUser.getName(), organisationId);
+    @PostMapping("/add-favorite")
+    public ResponseEntity<?> addAsFavorite(Principal connectedUser, @RequestBody @NotNull Integer organisationId) {
+        organisationService.addAsFavorite(connectedUser.getName(), organisationId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/remove-favorite")
+    public ResponseEntity<?> removeAsFavorite(Principal connectedUser, @RequestBody @NotNull Integer organisationId) {
+        organisationService.removeAsFavorite(connectedUser.getName(), organisationId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -70,13 +76,19 @@ public class OrganisationController {
         return ResponseEntity.ok(new OrganisationReturnDto(organisation));
     }
 
-    @GetMapping("/get-all-volunteers/{organisationId}")
-    public ResponseEntity<List<UserReturnDto>> getAllVolunteers(@PathVariable @NotNull Integer organisationId) {
-        List<User> volunteers = organisationService.findAllVolunteers(organisationId);
-        List<UserReturnDto> dtos = volunteers.stream()
+    @GetMapping("/get-all-favoriters/{organisationId}")
+    public ResponseEntity<List<UserReturnDto>> getAllFavoriters(@PathVariable @NotNull Integer organisationId) {
+        List<User> favoriters = organisationService.findAllFavoriters(organisationId);
+        List<UserReturnDto> dtos = favoriters.stream()
                 .map(UserReturnDto::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
+    }
+
+    @GetMapping("/get-all-fav-orgs")
+    public ResponseEntity<List<OrganisationReturnDto>> getAllFavoriteOrganisations(Principal connectedUser) {
+        return ResponseEntity.ok(organisationService.findAllFavoriteOrganisations(connectedUser.getName())
+                .stream().map(OrganisationReturnDto::new).toList());
     }
 
     @PostMapping("/{organisationId}/add-address")

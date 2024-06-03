@@ -1,7 +1,6 @@
 package com.alibou.security.dtos;
 
 import com.alibou.security.entities.Organisation;
-import com.alibou.security.entities.User;
 import lombok.*;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class OrganisationReturnDto {
 
     private Boolean isFeatured;
 
-    private List<UserReturnDto> volunteers;
+    private List<UserReturnDto> usersThatFavorited;
 
     private Integer ownerId;
 
@@ -44,8 +43,8 @@ public class OrganisationReturnDto {
         this.ownerId = organisation.getOwner().getId();
         this.ownerEmail = organisation.getOwner().getEmail();
         this.orgLink = organisation.getOrgLink();
-        if (organisation.getVolunteers() != null) {
-            this.volunteers = organisation.getVolunteers().stream().map(UserReturnDto::new).collect(Collectors.toList());
+        if (organisation.getUsersThatFavorited() != null) {
+            this.usersThatFavorited = organisation.getUsersThatFavorited().stream().map(UserReturnDto::new).collect(Collectors.toList());
         }
     }
 }

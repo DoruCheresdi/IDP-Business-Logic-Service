@@ -1,6 +1,5 @@
 package com.alibou.security.entities;
 
-import com.alibou.security.entities.Token;
 import com.alibou.security.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -12,8 +11,6 @@ import java.util.List;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.sound.sampled.ReverbType;
 
 @Data
 @Builder
@@ -44,11 +41,10 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Feedback feedback;
 
-
     @JsonIgnore
     @ToString.Exclude
-    @ManyToMany(mappedBy = "volunteers")
-    private List<Organisation> organisationsVolunteeredFor;
+    @ManyToMany(mappedBy = "usersThatFavorited")
+    private List<Organisation> favoritedOrganisations;
 
     @JsonIgnore
     @ToString.Exclude

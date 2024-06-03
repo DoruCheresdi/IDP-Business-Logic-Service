@@ -3,11 +3,9 @@ package com.alibou.security.service;
 import com.alibou.security.auth.AuthenticationService;
 import com.alibou.security.dtos.*;
 import com.alibou.security.entities.Address;
-import com.alibou.security.entities.Feedback;
 import com.alibou.security.entities.Organisation;
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.AddressRepository;
-import com.alibou.security.repository.FeedbackRepository;
 import com.alibou.security.repository.OrganisationRepository;
 import com.alibou.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -72,14 +70,25 @@ public class OrganisationService {
         organisationRepository.delete(organisation);
     }
 
-    public void addAsVolunteer(String userEmail, Integer organisationId) {
+    public void addAsFavorite(String userEmail, Integer organisationId) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
         Organisation organisation = findById(organisationId);
         if (organisation == null) {
             throw new ResponseStatusException(NOT_FOUND, "Unable to find organisation");
         }
-        organisation.getVolunteers().add(user);
+        organisation.getUsersThatFavorited().add(user);
+        organisationRepository.save(organisation);
+    }
+
+    public void removeAsFavorite(String userEmail, Integer organisationId) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+        Organisation organisation = findById(organisationId);
+        if (organisation == null) {
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find organisation");
+        }
+        organisation.getUsersThatFavorited().remove(user);
         organisationRepository.save(organisation);
     }
 
@@ -102,13 +111,20 @@ public class OrganisationService {
         return organisationRepository.save(organisation);
     }
 
-    public List<User> findAllVolunteers(Integer organisationId) {
+    public List<User> findAllFavoriters(Integer organisationId) {
         Organisation organisation = findById(organisationId);
         if (organisation == null) {
             throw new ResponseStatusException(NOT_FOUND, "Unable to find organisation");
         }
 
-        return organisation.getVolunteers();
+        return organisation.getUsersThatFavorited();
+    }
+
+    public List<Organisation> findAllFavoriteOrganisations(String userEmail) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+
+        return user.getFavoritedOrganisations();
     }
 
     public Organisation addAddressToOrganisation(Integer organisationId, Address address) {
