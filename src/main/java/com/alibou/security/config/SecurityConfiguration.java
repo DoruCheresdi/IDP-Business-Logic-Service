@@ -49,7 +49,8 @@ public class SecurityConfiguration {
             "/swagger-ui.html",
             "/auth/authenticate",
             "/auth/register",
-            "/error"};
+            "/error",
+            "/assets/**"};
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;

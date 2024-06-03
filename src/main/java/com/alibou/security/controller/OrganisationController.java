@@ -15,7 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -128,5 +130,12 @@ public class OrganisationController {
     @GetMapping("/all-featured")
     public ResponseEntity<List<OrganisationReturnDto>> findAllFeaturedOrganisations() {
         return ResponseEntity.ok(organisationService.findAllFeatured().stream().map(OrganisationReturnDto::new).toList());
+    }
+
+    @PostMapping("/upload-picture/{organisationId}")
+    public ResponseEntity savePhotoToUser(@RequestParam("picture") MultipartFile multipartFile,
+                                          @PathVariable Integer organisationId) throws IOException {
+        organisationService.saveOrganisationPicture(multipartFile, organisationId);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

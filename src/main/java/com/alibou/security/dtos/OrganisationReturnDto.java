@@ -1,6 +1,7 @@
 package com.alibou.security.dtos;
 
 import com.alibou.security.entities.Organisation;
+import com.alibou.security.entities.Review;
 import lombok.*;
 
 import java.util.List;
@@ -33,6 +34,8 @@ public class OrganisationReturnDto {
 
     private String orgLink;
 
+    private double averageRating;
+
     public OrganisationReturnDto(Organisation organisation) {
         this.id = organisation.getId();
         this.name = organisation.getName();
@@ -43,6 +46,7 @@ public class OrganisationReturnDto {
         this.ownerId = organisation.getOwner().getId();
         this.ownerEmail = organisation.getOwner().getEmail();
         this.orgLink = organisation.getOrgLink();
+        this.averageRating = organisation.getReviews().stream().mapToDouble(Review::getStars).average().orElse(0.0);
         if (organisation.getUsersThatFavorited() != null) {
             this.usersThatFavorited = organisation.getUsersThatFavorited().stream().map(UserReturnDto::new).collect(Collectors.toList());
         }

@@ -38,4 +38,10 @@ public class UserController {
         Page<UserReturnDto> dtos = users.map(UserReturnDto::new);
         return ResponseEntity.ok(dtos);
     }
+
+    @GetMapping("/data")
+    public ResponseEntity<UserReturnDto> findUserData(Principal connectedUser) {
+        User user = userService.findUserByEmail(connectedUser.getName());
+        return ResponseEntity.ok(new UserReturnDto(user));
+    }
 }

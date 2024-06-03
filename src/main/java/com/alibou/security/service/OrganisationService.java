@@ -8,12 +8,16 @@ import com.alibou.security.entities.User;
 import com.alibou.security.repository.AddressRepository;
 import com.alibou.security.repository.OrganisationRepository;
 import com.alibou.security.repository.UserRepository;
+import com.alibou.security.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
@@ -156,5 +160,26 @@ public class OrganisationService {
 
     public List<Organisation> findAllFeatured() {
         return organisationRepository.findAllByIsFeatured(true);
+    }
+
+    public void saveOrganisationPicture(MultipartFile multipartFile, Integer organisationId) throws IOException {
+        if (multipartFile.isEmpty()) {
+            throw new ResponseStatusException(BAD_REQUEST, "Please select a file to upload");
+        }
+        if (multipartFile.getOriginalFilename() == null) {
+            throw new ResponseStatusException(BAD_REQUEST, "File has no name");
+        }
+        Organisation organisation = organisationRepository.findById(organisationId)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+        String uploadDir = "assets/org-pictures/" + organisationId;
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        // save image name to organisation:
+        organisation.setPicture(fileName);
+        organisationRepository.save(organisation);
     }
 }

@@ -32,6 +32,8 @@ public class Organisation {
 
     private Boolean isFeatured;
 
+    private String picture;
+
     @JsonIgnore
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
