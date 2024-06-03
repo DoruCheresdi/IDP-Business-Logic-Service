@@ -1,6 +1,7 @@
 package com.alibou.security.service;
 
 import com.alibou.security.dtos.ChangePasswordRequest;
+import com.alibou.security.dtos.UserEditRequestDto;
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,5 +48,14 @@ public class UserService {
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+    }
+
+    public void editUser(UserEditRequestDto userEditRequestDto, Principal principal) {
+        User user = userRepository.findByEmail(principal.getName()).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+
+        user.setEmail(userEditRequestDto.getEmail());
+        user.setFirstname(userEditRequestDto.getFirstName());
+        user.setLastname(userEditRequestDto.getLastName());
+        userRepository.save(user);
     }
 }

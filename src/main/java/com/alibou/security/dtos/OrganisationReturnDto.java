@@ -48,7 +48,9 @@ public class OrganisationReturnDto {
         this.ownerId = organisation.getOwner().getId();
         this.ownerEmail = organisation.getOwner().getEmail();
         this.orgLink = organisation.getOrgLink();
-        this.averageRating = organisation.getReviews().stream().mapToDouble(Review::getStars).average().orElse(0.0);
+        if (organisation.getReviews() != null) {
+            this.averageRating = organisation.getReviews().stream().mapToDouble(Review::getStars).average().orElse(0.0);
+        }
         this.picture = organisation.getPicture();
         if (organisation.getUsersThatFavorited() != null) {
             this.usersThatFavorited = organisation.getUsersThatFavorited().stream().map(UserReturnDto::new).collect(Collectors.toList());

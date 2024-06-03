@@ -1,6 +1,7 @@
 package com.alibou.security.controller;
 
 import com.alibou.security.dtos.ChangePasswordRequest;
+import com.alibou.security.dtos.UserEditRequestDto;
 import com.alibou.security.dtos.UserReturnDto;
 import com.alibou.security.entities.User;
 import com.alibou.security.service.UserService;
@@ -43,5 +44,11 @@ public class UserController {
     public ResponseEntity<UserReturnDto> findUserData(Principal connectedUser) {
         User user = userService.findUserByEmail(connectedUser.getName());
         return ResponseEntity.ok(new UserReturnDto(user));
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity<?> editUser(@RequestBody UserEditRequestDto userEditRequestDto, Principal principal) {
+        userService.editUser(userEditRequestDto, principal);
+        return ResponseEntity.ok().build();
     }
 }
