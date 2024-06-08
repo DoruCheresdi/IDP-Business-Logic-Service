@@ -38,6 +38,8 @@ public class OrganisationReturnDto {
 
     private String picture;
 
+    private List<DomainDto> domains;
+
     public OrganisationReturnDto(Organisation organisation) {
         this.id = organisation.getId();
         this.name = organisation.getName();
@@ -54,6 +56,9 @@ public class OrganisationReturnDto {
         this.picture = organisation.getPicture();
         if (organisation.getUsersThatFavorited() != null) {
             this.usersThatFavorited = organisation.getUsersThatFavorited().stream().map(UserReturnDto::new).collect(Collectors.toList());
+        }
+        if (this.domains != null) {
+            this.domains = organisation.getDomains().stream().map(DomainDto::new).toList();
         }
     }
 }

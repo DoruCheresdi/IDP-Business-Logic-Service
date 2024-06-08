@@ -58,6 +58,15 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviews;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "domains_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "domain_id"))
+    private List<ActivityDomain> domains;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role != null) {
