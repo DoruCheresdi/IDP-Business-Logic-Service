@@ -52,6 +52,12 @@ public class OrganisationController {
         return ResponseEntity.ok(organisationService.findAll().stream().map(OrganisationReturnDto::new).toList());
     }
 
+    @GetMapping("/all-ordered")
+    public ResponseEntity<List<OrganisationReturnDto>> findAllOrganisationsOrdered(Principal connectedUser) {
+        return ResponseEntity.ok(organisationService.findAllOrdered(connectedUser.getName())
+                .stream().map(OrganisationReturnDto::new).toList());
+    }
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> deleteOrganisation(@PathVariable @NotNull Integer id) {
