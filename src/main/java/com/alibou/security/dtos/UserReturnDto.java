@@ -27,7 +27,7 @@ public class UserReturnDto {
         this.lastname = user.getLastname();
         this.email = user.getEmail();
         this.profilePicture = user.getProfilePicture();
-        if (this.domains != null) {
+        if (user.getDomains() != null) {
             this.domains = user.getDomains().stream().map(DomainDto::new).toList();
         }
     }

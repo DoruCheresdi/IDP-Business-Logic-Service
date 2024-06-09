@@ -31,31 +31,31 @@ public class DomainController {
     }
 
     @PostMapping("/add-user")
-    public ResponseEntity<?> addUserToDomain(DomainUserReqDto dto) {
+    public ResponseEntity<?> addUserToDomain(@RequestBody @Valid DomainUserReqDto dto) {
         domainService.addUserToDomain(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/add-org")
-    public ResponseEntity<?> addOrganisationToDomain(DomainOrgReqDto dto) {
+    public ResponseEntity<?> addOrganisationToDomain(@RequestBody @Valid DomainOrgReqDto dto) {
         domainService.addOrganisationToDomain(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/remove-user")
-    public ResponseEntity<?> removeUserFromDomain(DomainUserReqDto dto) {
+    public ResponseEntity<?> removeUserFromDomain(@RequestBody @Valid DomainUserReqDto dto) {
         domainService.removeUserFromDomain(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/remove-org")
-    public ResponseEntity<?> removeOrganisationFromDomain(DomainOrgReqDto dto) {
+    public ResponseEntity<?> removeOrganisationFromDomain(@RequestBody @Valid DomainOrgReqDto dto) {
         domainService.removeOrganisationFromDomain(dto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/by-org")
-    public ResponseEntity<List<DomainDto>> findDomainsByOrganisation(Integer orgId) {
+    public ResponseEntity<List<DomainDto>> findDomainsByOrganisation(@RequestBody Integer orgId) {
         return ResponseEntity.ok(domainService.findByOrganisation(orgId).stream().map(DomainDto::new).toList());
     }
 }

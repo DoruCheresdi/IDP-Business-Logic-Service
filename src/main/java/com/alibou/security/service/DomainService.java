@@ -44,7 +44,11 @@ public class DomainService {
         var user = userRepository.findByEmail(dto.getUserEmail())
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
 
+        if (domain.getUsers().contains(user)) {
+            throw new ResponseStatusException(NOT_FOUND, "User already exists in domain");
+        }
         domain.getUsers().add(user);
+        user.getDomains().add(domain);
         domainRepository.save(domain);
     }
 
@@ -55,7 +59,11 @@ public class DomainService {
         var organisation = organisationRepository.findById(dto.getOrgId())
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
 
+        if (domain.getOrganisations().contains(organisation)) {
+            throw new ResponseStatusException(NOT_FOUND, "Organisation already exists in domain");
+        }
         domain.getOrganisations().add(organisation);
+        organisation.getDomains().add(domain);
         domainRepository.save(domain);
     }
 
@@ -67,6 +75,7 @@ public class DomainService {
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
 
         domain.getUsers().remove(user);
+        user.getDomains().remove(domain);
         domainRepository.save(domain);
     }
 
@@ -78,6 +87,7 @@ public class DomainService {
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find organisation"));
 
         domain.getOrganisations().remove(organisation);
+        organisation.getDomains().remove(domain);
         domainRepository.save(domain);
     }
 

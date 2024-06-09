@@ -1,5 +1,6 @@
 package com.alibou.security.dtos;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -9,7 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 public class DomainUserReqDto {
 
+    @NotNull
     private String userEmail;
 
+    @NotNull
     private Integer domainId;
 }

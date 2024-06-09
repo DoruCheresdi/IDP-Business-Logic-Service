@@ -57,7 +57,7 @@ public class OrganisationReturnDto {
         if (organisation.getUsersThatFavorited() != null) {
             this.usersThatFavorited = organisation.getUsersThatFavorited().stream().map(UserReturnDto::new).collect(Collectors.toList());
         }
-        if (this.domains != null) {
+        if (organisation.getDomains() != null) {
             this.domains = organisation.getDomains().stream().map(DomainDto::new).toList();
         }
     }
