@@ -9,7 +9,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -28,21 +27,21 @@ public class BenefitController {
         return new ResponseEntity<>(new BenefitReturnDto(benefit), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<BenefitReturnDto> getBenefit(@NotNull Integer id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<BenefitReturnDto> getBenefit(@PathVariable @NotNull Integer id) {
         Benefit benefit = benefitService.findById(id);
         return new ResponseEntity<>(new BenefitReturnDto(benefit), HttpStatus.OK);
     }
 
-    @DeleteMapping()
-    @PreAuthorize("hasAuthority('admin:delete')")
-    public ResponseEntity<?> deleteBenefit(@NotNull Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBenefit(@PathVariable @NotNull Integer id) {
         benefitService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/get-all-benefits")
-    public ResponseEntity<List<BenefitReturnDto>> getAllBenefitsForOrganisations(@NotNull Integer organisationId) {
+    @GetMapping("/get-all-by-org/{organisationId}")
+    public ResponseEntity<List<BenefitReturnDto>> getAllBenefitsForOrganisations(
+            @PathVariable @NotNull Integer organisationId) {
         List<Benefit> organisations = benefitService.findAllBenefitsForOrganisation(organisationId);
         return ResponseEntity.ok(organisations.stream().map(BenefitReturnDto::new).toList());
     }

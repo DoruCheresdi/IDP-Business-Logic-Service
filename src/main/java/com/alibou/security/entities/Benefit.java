@@ -20,6 +20,10 @@ public class Benefit {
 
     private String name;
 
+    private String subunitaryDescription;
+
+    private String superunitaryDescription;
+
     @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)

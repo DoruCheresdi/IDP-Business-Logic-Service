@@ -16,9 +16,15 @@ public class BenefitReturnDto {
 
     private String name;
 
+    private String subunitaryDescription;
+
+    private String superunitaryDescription;
+
     public BenefitReturnDto(Benefit benefit) {
         this.id = benefit.getId();
         this.priceInLei = benefit.getPriceInLei();
         this.name = benefit.getName();
+        this.subunitaryDescription = benefit.getSubunitaryDescription();
+        this.superunitaryDescription = benefit.getSuperunitaryDescription();
     }
 }

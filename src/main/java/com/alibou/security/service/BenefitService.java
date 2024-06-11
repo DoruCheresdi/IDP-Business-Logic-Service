@@ -40,6 +40,8 @@ public class BenefitService {
                 .name(dto.getName())
                 .priceInLei(dto.getPriceInLei())
                 .organisation(organisation)
+                .subunitaryDescription(dto.getSubunitaryDescription())
+                .superunitaryDescription(dto.getSuperunitaryDescription())
                 .build();
 
         return benefitRepository.save(benefit);

@@ -16,6 +16,10 @@ public class BenefitDto {
     @NotNull
     private String name;
 
+    private String subunitaryDescription;
+
+    private String superunitaryDescription;
+
     @NotNull
     private Integer organisationId;
 }
