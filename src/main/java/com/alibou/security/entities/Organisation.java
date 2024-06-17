@@ -58,6 +58,11 @@ public class Organisation {
 
     @JsonIgnore
     @ToString.Exclude
+    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<VolunteeringEvent> volunteeringEvents;
+
+    @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "organisationReviewed", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Review> reviews;
 

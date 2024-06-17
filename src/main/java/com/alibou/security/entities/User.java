@@ -3,14 +3,13 @@ package com.alibou.security.entities;
 import com.alibou.security.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @Builder
@@ -47,6 +46,12 @@ public class User implements UserDetails {
     @ToString.Exclude
     @ManyToMany(mappedBy = "usersThatFavorited")
     private List<Organisation> favoritedOrganisations;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "volunteers")
+    private List<VolunteeringEvent> eventsVolunteered;
+
 
     @JsonIgnore
     @ToString.Exclude
