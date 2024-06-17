@@ -40,6 +40,8 @@ public class OrganisationReturnDto {
 
     private List<DomainDto> domains;
 
+    private List<BenefitReturnDto> benefits;
+
     public OrganisationReturnDto(Organisation organisation) {
         this.id = organisation.getId();
         this.name = organisation.getName();
@@ -59,6 +61,9 @@ public class OrganisationReturnDto {
         }
         if (organisation.getDomains() != null) {
             this.domains = organisation.getDomains().stream().map(DomainDto::new).toList();
+        }
+        if (organisation.getBenefits() != null) {
+            this.benefits = organisation.getBenefits().stream().map(BenefitReturnDto::new).toList();
         }
     }
 }

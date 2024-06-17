@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/BenefitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/BenefitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/BenefitDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/BenefitDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/BenefitReturnDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/BenefitReturnDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Benefit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/Benefit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/BenefitService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationReturnDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/OrganisationReturnDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +154,9 @@
       <workItem from="1717353131193" duration="7980000" />
       <workItem from="1717406021313" duration="15141000" />
       <workItem from="1717834621895" duration="13903000" />
-      <workItem from="1718140665406" duration="3642000" />
+      <workItem from="1718140665406" duration="3670000" />
+      <workItem from="1718440934381" duration="1845000" />
+      <workItem from="1718546872911" duration="1827000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -425,7 +423,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717947385890</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="added benefit crud">
+      <option name="closed" value="true" />
+      <created>1718145277270</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1718145277270</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -455,7 +461,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added review" />
     <MESSAGE value="added return dtos" />
     <MESSAGE value="added more return dtos" />
     <MESSAGE value="added address to organisation" />
@@ -480,7 +485,8 @@
     <MESSAGE value="added activity domains" />
     <MESSAGE value="added domain crud" />
     <MESSAGE value="added ordered orgs all endpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ordered orgs all endpoint" />
+    <MESSAGE value="added benefit crud" />
+    <option name="LAST_COMMIT_MESSAGE" value="added benefit crud" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1716655382228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
