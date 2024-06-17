@@ -1,7 +1,6 @@
 package com.alibou.security.dtos;
 
 import com.alibou.security.entities.VolunteeringEvent;
-import com.alibou.security.entities.VolunteeringEventRequest;
 import lombok.*;
 
 import java.util.Date;
@@ -18,6 +17,8 @@ public class VolunteeringEventDto {
 
     private String name;
 
+    private String description;
+
     private Date date;
 
     private String hours;
@@ -28,11 +29,12 @@ public class VolunteeringEventDto {
 
     private List<UserReturnDto> volunteers;
 
-    private List<VolunteeringEventRequest> requests;
+    private List<VolunteeringEventRequestDto> requests;
 
     public VolunteeringEventDto(VolunteeringEvent event) {
         this.id = event.getId();
         this.name = event.getName();
+        this.description = event.getDescription();
         this.date = event.getDate();
         this.hours = event.getHours();
         this.location = event.getLocation();
@@ -41,7 +43,7 @@ public class VolunteeringEventDto {
             this.volunteers = event.getVolunteers().stream().map(UserReturnDto::new).toList();
         }
         if (event.getRequests() != null) {
-            this.requests = event.getRequests();
+            this.requests = event.getRequests().stream().map(VolunteeringEventRequestDto::new).toList();
         }
     }
 }

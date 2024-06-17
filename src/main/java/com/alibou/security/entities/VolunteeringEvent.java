@@ -21,6 +21,8 @@ public class VolunteeringEvent {
 
     private String name;
 
+    private String description;
+
     private Date date;
 
     private String hours;

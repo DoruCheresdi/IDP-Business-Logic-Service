@@ -40,6 +40,7 @@ public class VolunteeringEventService {
                 .hours(dto.getHours())
                 .location(dto.getLocation())
                 .organisation(organisation)
+                .description(dto.getDescription())
                 .build();
 
         return volunteeringEventRepository.save(event);
