@@ -43,4 +43,9 @@ public class VolunteeringEvent {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> volunteers;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "volunteeringEvent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<VolunteeringEventRequest> requests;
 }

@@ -52,6 +52,11 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "volunteers")
     private List<VolunteeringEvent> eventsVolunteered;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "volunteer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<VolunteeringEventRequest> eventRequests;
+
 
     @JsonIgnore
     @ToString.Exclude

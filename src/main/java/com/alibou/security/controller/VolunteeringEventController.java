@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -40,6 +41,19 @@ public class VolunteeringEventController {
     @PostMapping("/add-volunteer")
     public ResponseEntity<Void> addVolunteer(@RequestBody UserEventDto dto) {
         volunteeringEventService.addVolunteer(dto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add-request")
+    public ResponseEntity<Void> addRequest(@RequestBody Integer eventId,
+                                           Principal connectedUser) {
+        volunteeringEventService.addRequest(eventId, connectedUser.getName());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/reject-request")
+    public ResponseEntity<Void> rejectRequest(@RequestBody Integer requestId) {
+        volunteeringEventService.rejectRequest(requestId);
         return ResponseEntity.ok().build();
     }
 }
