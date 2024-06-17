@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class UserReturnDto {
 
+    private Integer id;
+
     private String firstname;
 
     private String lastname;
@@ -20,13 +22,17 @@ public class UserReturnDto {
 
     private String profilePicture;
 
+    private String cvPath;
+
     private List<DomainDto> domains;
 
     public UserReturnDto(User user) {
+        this.id = user.getId();
         this.firstname = user.getFirstname();
         this.lastname = user.getLastname();
         this.email = user.getEmail();
         this.profilePicture = user.getProfilePicture();
+        this.cvPath = user.getCvPath();
         if (user.getDomains() != null) {
             this.domains = user.getDomains().stream().map(DomainDto::new).toList();
         }

@@ -4,16 +4,21 @@ import com.alibou.security.dtos.ChangePasswordRequest;
 import com.alibou.security.dtos.UserEditRequestDto;
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.UserRepository;
+import com.alibou.security.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.security.Principal;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
@@ -56,6 +61,40 @@ public class UserService {
         user.setEmail(userEditRequestDto.getEmail());
         user.setFirstname(userEditRequestDto.getFirstName());
         user.setLastname(userEditRequestDto.getLastName());
+        userRepository.save(user);
+    }
+
+    public void saveProfilePicture(MultipartFile multipartFile, Principal connectedUser) throws IOException {
+        if (multipartFile.isEmpty()) {
+            throw new ResponseStatusException(BAD_REQUEST, "Please select a file to upload");
+        }
+        if (multipartFile.getOriginalFilename() == null) {
+            throw new ResponseStatusException(BAD_REQUEST, "File has no name");
+        }
+        User user = userRepository.findByEmail(connectedUser.getName()).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+        String uploadDir = "assets/user-photos/" + user.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        user.setProfilePicture(fileName);
+        userRepository.save(user);
+    }
+
+    public void saveCV(MultipartFile multipartFile, Principal connectedUser) throws IOException {
+        if (multipartFile.isEmpty()) {
+            throw new ResponseStatusException(BAD_REQUEST, "Please select a file to upload");
+        }
+        if (multipartFile.getOriginalFilename() == null) {
+            throw new ResponseStatusException(BAD_REQUEST, "File has no name");
+        }
+        User user = userRepository.findByEmail(connectedUser.getName()).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+        String uploadDir = "assets/cv/" + user.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        user.setCvPath(fileName);
         userRepository.save(user);
     }
 }

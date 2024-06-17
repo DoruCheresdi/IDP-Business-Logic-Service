@@ -10,10 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @RestController
@@ -50,5 +53,19 @@ public class UserController {
     public ResponseEntity<?> editUser(@RequestBody UserEditRequestDto userEditRequestDto, Principal principal) {
         userService.editUser(userEditRequestDto, principal);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/upload-profile-picture")
+    public ResponseEntity<?> savePhotoToUser(@RequestParam("picture") MultipartFile multipartFile,
+                                          Principal connectedUser) throws IOException {
+        userService.saveProfilePicture(multipartFile, connectedUser);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/upload-cv")
+    public ResponseEntity<?> saveCVToUser(@RequestParam("cv") MultipartFile multipartFile,
+                                          Principal connectedUser) throws IOException {
+        userService.saveCV(multipartFile, connectedUser);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }
