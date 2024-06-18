@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fecece46-3f8a-4a4a-8dd5-063eef6a74de" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/VolunteeringEventRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/NotificationDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/VolunteeringEventDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/dtos/VolunteeringEventDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/VolunteeringEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/entities/VolunteeringEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/VolunteeringEventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/VolunteeringEventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alibou/security/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +162,7 @@
       <workItem from="1717834621895" duration="13903000" />
       <workItem from="1718140665406" duration="3670000" />
       <workItem from="1718440934381" duration="1845000" />
-      <workItem from="1718546872911" duration="11577000" />
+      <workItem from="1718546872911" duration="15987000" />
     </task>
     <task id="LOCAL-00001" summary="project innit">
       <created>1713219988468</created>
@@ -478,7 +477,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718640722154</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="added description to voluntering event">
+      <option name="closed" value="true" />
+      <created>1718662590429</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1718662590429</updated>
+    </task>
+    <task id="LOCAL-00044" summary="added user to event req dto">
+      <option name="closed" value="true" />
+      <created>1718667813344</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1718667813344</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,8 +523,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added token validation errors, they go into the message now" />
-    <MESSAGE value="added openapi changes, fixed docker compose" />
     <MESSAGE value="fixed cors and authentication" />
     <MESSAGE value="fixed organisation volunteers list" />
     <MESSAGE value="fixed organisation volunteers list and changed user controller path" />
@@ -533,7 +546,9 @@
     <MESSAGE value="added volunteering event request" />
     <MESSAGE value="added user profile and cv" />
     <MESSAGE value="added tax redirection form link" />
-    <option name="LAST_COMMIT_MESSAGE" value="added tax redirection form link" />
+    <MESSAGE value="added description to voluntering event" />
+    <MESSAGE value="added user to event req dto" />
+    <option name="LAST_COMMIT_MESSAGE" value="added user to event req dto" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IDP_Business_Logic_Service$SecurityApplication.ic" NAME="SecurityApplication Coverage Results" MODIFIED="1716655382228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

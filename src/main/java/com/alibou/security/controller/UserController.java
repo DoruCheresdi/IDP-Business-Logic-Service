@@ -1,6 +1,7 @@
 package com.alibou.security.controller;
 
 import com.alibou.security.dtos.ChangePasswordRequest;
+import com.alibou.security.dtos.NotificationDto;
 import com.alibou.security.dtos.UserEditRequestDto;
 import com.alibou.security.dtos.UserReturnDto;
 import com.alibou.security.entities.User;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -67,5 +69,10 @@ public class UserController {
                                           Principal connectedUser) throws IOException {
         userService.saveCV(multipartFile, connectedUser);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/notifications")
+    public ResponseEntity<List<NotificationDto>> getNotifications(Principal connectedUser) {
+        return ResponseEntity.ok(userService.getNotifications(connectedUser.getName()));
     }
 }

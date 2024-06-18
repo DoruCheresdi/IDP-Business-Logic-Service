@@ -1,6 +1,7 @@
 package com.alibou.security.service;
 
 import com.alibou.security.dtos.ChangePasswordRequest;
+import com.alibou.security.dtos.NotificationDto;
 import com.alibou.security.dtos.UserEditRequestDto;
 import com.alibou.security.entities.User;
 import com.alibou.security.repository.UserRepository;
@@ -17,6 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -96,5 +100,29 @@ public class UserService {
 
         user.setCvPath(fileName);
         userRepository.save(user);
+    }
+
+    public List<NotificationDto> getNotifications(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Unable to find user"));
+        return getUpcomingEventsNotifications(user);
+    }
+
+    private List<NotificationDto> getUpcomingEventsNotifications(User user) {
+        Date dateIn10Days = new Date();
+        // add 10 days to date:
+        dateIn10Days.setTime(dateIn10Days.getTime() + 10 * 24 * 60 * 60 * 1000);
+
+        String pattern = "MM-dd-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        return user.getEventsVolunteered().stream()
+                .filter(event -> event.getDate().after(new Date()))
+                .filter(event -> event.getDate().before(dateIn10Days))
+                .map(event -> NotificationDto.builder()
+                        .message("You are volunteering for " + event.getName() + " on "
+                                + simpleDateFormat.format(event.getDate()) + " at hours " + event.getHours())
+                        .icon("event")
+                        .build())
+                .toList();
     }
 }
